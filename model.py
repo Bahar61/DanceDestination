@@ -19,6 +19,10 @@ class User(db.Model):
     email = db.Column(db.String(70), nullable=False)
     password = db.Column(db.String(70), nullable=False)
 
+    events = db.relationship('Event',
+                             secondary='users_event',
+                             backref='users')
+
     def __repr__(self):
         """Provide helpful representation when printed."""
 
@@ -37,16 +41,22 @@ class Event(db.Model):
     # event model class
 
     event_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    date = db.Column(db.Integer, nullable=False)
+    name = db.Column(db.String(70), nullable=False)
+    date = db.Column(db.DateTime, nullable=False)
     location = db.Column(db.String(70), nullable=False)
     price = db.Column(db.Float, nullable=True)
+    image = db.Column(db.String(100))
+
+    genres = db.relationship('Genre',
+                             secondary='event_music',
+                             backref='events')
     
 
     def __repr__(self):
         """Provide helpful representation when printed."""
 
         return f"""<Event event_id={self.event_id} 
-                                   date={self.date} 
+                                   date={self.date.strftime('%d-%b-%Y')} 
                                    location={self.location}
                                     price={self.price}>"""
 
@@ -82,17 +92,6 @@ class UserEvent(db.Model):
                         db.ForeignKey('users.user_id'))
     event_id = db.Column(db.Integer,
                          db.ForeignKey('events.event_id'))
-
-
-
-    # Define relationship to user
-    user = db.relationship("User",
-                           backref=("users_event"))
-
-    # Define relationship to event
-    event = db.relationship("Event",
-                            backref=("users_event"))
-
     
     def __repr__(self):
         """Provide helpful representation when printed."""
@@ -113,17 +112,6 @@ class EventGenre(db.Model):
                          db.ForeignKey('genres.genre_id'))
     event_id = db.Column(db.Integer, 
                         db.ForeignKey('events.event_id'))
-
-
-
-    # Define relationship to user
-    genre = db.relationship("Genre",
-                           backref=("event_music"))
-
-    # Define relationship to movie
-    event = db.relationship("Event",
-                            backref=("event_music"))
-
     
     def __repr__(self):
         """Provide helpful representation when printed."""

@@ -20,117 +20,109 @@ app.jinja_env.undefined = StrictUndefined
 @app.route('/')
 def index():
     """Homepage."""
+
+    # Use jinja to show events in the first page
+    # for loop through all events(query.all()) in jinja
     return render_template("dance-destination.html")
 
 
 
-@app.route("/users")
-def user_list():
-    """Show list of users."""
-
-    users = User.query.all()
-    return render_template("user.html", users=users)
-
-
-
-@app.route("/register", methods=["GET"])
+@app.route('/register', methods=['GET'])
 def register_form():
-    """Show registration form."""
+    """Show form for user signup."""
 
     return render_template("register-form.html")
 
 
-
-@app.route("/register", methods=["POST"])
+@app.route('/register', methods=['POST'])
 def register_process():
-    """Handle processing the registration form."""
+    """Process registration."""
 
-    registration_email = request.form['email']
-    registration_pass = request.form['password']
-
-    user = User.query.filter_by(email=registration_email).first()
+    # Get form variables
+    email = request.form["email"]
+    password = request.form["password"]
     
-    if user:
-        flash("There is an account associated with this email address! Please Login!")
-    else:
-        new_user = User(email=registration_email, password=registration_pass)
 
-        db.session.add(new_user)
-        db.session.commit()
+    new_user = User(email=email, password=password)
 
+    db.session.add(new_user)
+    db.session.commit()
 
-
-    return redirect("/")
+    flash(f"User {email} added.")
+    return redirect(f"/users/{new_user.user_id}")
 
 
-
-@app.route("/login", methods=["GET"])
-def show_login():
+@app.route('/login', methods=['GET'])
+def login_form():
     """Show login form."""
 
     return render_template("login.html")
 
 
-@app.route("/login", methods=["POST"])
-def process_login():
-    """Log user into site.
+@app.route('/login', methods=['POST'])
+def login_process():
+    """Process login."""
 
-    Find the user's login credentials located in the 'request.form'
-    dictionary, look up the user, and store them in the session.
-    """
+    # Get form variables
+    email = request.form["email"]
+    password = request.form["password"]
 
-    email = request.form.get('email')
-    password = request.form.get('password')
-
-    user = usres.get_by_email(email)
+    user = User.query.filter_by(email=email).first()
 
     if not user:
-        flash("The email address doesn't exist.")
-        return redirect('/login')
-
-    if user.password != password:
-        flash("Incorrect password.")
+        flash("This email is not registered!")
         return redirect("/login")
 
-    session["logged_in_customer_email"] = user.email
-    flash("Logged in.")
+    if user.password != password:
+        flash("Incorrect password")
+        return redirect("/login")
+
+    session["user_id"] = user.user_id
+
+    flash("Logged in")
+    return redirect(f"/users/{user.user_id}")
+
+
+@app.route('/logout')
+def logout():
+    """Log out."""
+
+    del session["user_id"]
+    flash("Logged Out.")
     return redirect("/")
 
 
-@app.route("/logout")
-def process_logout():
-    """Log user out."""
 
-    del session["logged_in_customer_email"]
-    flash("Logged out.")
-    return redirect("/")
+@app.route("/events/<music_genre>")
+def show_event(music_genre):
+    """Show info about event.
+    Also, provide a button to share and add."""
 
 
+    """If user is logged in let them add event."""    
+    # event = Event.query(music_genre)
+    # user_id = session.get("user_id")
 
-@app.route("/events")
-def events_list():
-    """Show list of events."""
-
-    events = Event.query.all()
-    return render_template("events.html", events=events)
-
-
-
-@app.route("/events/<event_id>")
-def show_event(event_id):
-    """Return page showing the details of a given event.
-
-    Show all info about a event. Also, provide a button to add that event.
-    """
-
-    event = events.get_by_id(event_id)
-    print(event)
-    return render_template("event-details.html",
-                           display_event=event)
+    # if user_id:
+    #     user_event_id = UserEvent.query.filter_by(
+    #         user_id=user_id, event_id=event_id).first()
+    # else:
+    #     user_event_id = None
 
 
 
 
+    return render_template("events.html", name=name,
+                                          date=date,
+                                          location=location,
+                                          price=price,
+                                          image=image)
+
+
+@app.route('/About')
+def about():
+    """Homepage."""
+    return render_template("about.html")
 
 
 if __name__ == "__main__":
@@ -141,6 +133,7 @@ if __name__ == "__main__":
     app.jinja_env.auto_reload = app.debug
 
     connect_to_db(app)
+    app.config['SECRET_KEY'] = "<Something you can't guess!>"
 
     # Use the DebugToolbar
     DebugToolbarExtension(app)

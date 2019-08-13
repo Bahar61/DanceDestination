@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+    <h3>{{ event.name }}</h3>
+
+    <div class="row">
+
+        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+            <img src="{{ event.image-url }}" class="img-responsive">
+        </div>
+
+        <div class="col-xs-8 col-sm-6 col-md-4 col-lg-3">
+            <div class="well">
+                <h3>Events price</h3>
+                <p> {{ display_event.price_str() }} </p>
+                <a class="btn btn-primary" href="/add_to_event/{{ display_event.event_id }}">
+                    Add to My Events
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="event-details">
+
+        <h3>Event details</h3>
+
+        <ul>
+            <li>Event Music Genre: {{ display_event.music_genre }}</li>
+            <li>Location: {{ display_event.location }}</li>
+            <li>Date: {{ display_event.date }}</li>
+            
+        </ul>
+    </div>
+
+{% endblock %}
