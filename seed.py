@@ -2,10 +2,10 @@
 
 from sqlalchemy import func
 from model import User
-from model import DanceEvent
-from model import MusicGenre
+from model import Event
+from model import Genre
 from model import UserEvent
-from model import EventMusicGenre
+from model import EventGenre
 
 from model import connect_to_db, db
 from server import app
@@ -81,13 +81,51 @@ def music_genre():
 
     print("Music Genre")
 
-    
+    genre = Genre(genre_id=genre_id, 
+                  music_genre=music_genre)
 
-        #add to the session to store
-        db.session.add(rating)
+    #add to the session to store
+    db.session.add(genre)
 
     #commit the work
     db.session.commit()
+
+
+
+def user_event():
+    """Load user event"""
+    print("User Event")
+
+    userevent = UserEvent(user_event_id=user_event_id,
+                          user_id=user_id,
+                          event_id=event_id)
+
+
+     #add to the session to store
+    db.session.add(userevent)
+
+    #commit the work
+    db.session.commit()
+
+
+
+def event_genre():
+    """Load event genre """
+
+    print("Event Genre")
+
+    eventgenre = EventGenre(event_music_id=event_music_id,
+                           genre_id=genre_id,
+                           event_id=event_id)
+
+
+    #add to the session to store
+    db.session.add(eventgenre)
+
+    #commit the work
+    db.session.commit()
+
+
 
 
 def set_val_event_id():
@@ -98,7 +136,7 @@ def set_val_event_id():
     max_id = int(result[0])
 
     # Set the value for the next event_id to be max_id + 1
-    query = "SELECT setval('event_event_id_seq', :new_id)"
+    query = "SELECT setval('events_event_id_seq', :new_id)"
     db.session.execute(query, {'new_id': max_id + 1})
     db.session.commit()
 
@@ -124,6 +162,9 @@ if __name__ == "__main__":
 
     # Import different types of data
     load_users()
-    load_movies()
-    load_ratings()
+    load_events()
+    music_genre()
+    user_event()
+    event_genre()
+    set_val_event_id()
     set_val_user_id()
