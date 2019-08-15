@@ -1,6 +1,6 @@
 """Dance Destination."""
 
-from jinja2 import StrictUndefined
+from jinja2 import StrictUndefined 
 
 from flask_debugtoolbar import DebugToolbarExtension
 
@@ -11,19 +11,43 @@ from model import User, Event, Genre, UserEvent, EventGenre, connect_to_db, db
 app = Flask(__name__)
 
 # Required to use Flask sessions and the debug toolbar
-app.secret_key = "Something you can't guess!"
+app.secret_key = "Something I don't want you to guess!"
 
 #if an undefined variable used in Jinja2, raises an error.
 app.jinja_env.undefined = StrictUndefined
 
 
-@app.route('/')
+@app.route('/', methods=['GET'])
 def index():
     """Homepage."""
 
-    # Use jinja to show events in the first page
-    # for loop through all events(query.all()) in jinja
-    return render_template("dance-destination.html")
+   
+    return render_template("dance_destination.html")
+
+
+
+
+@app.route('/', methods=['POST'])
+def search_event():
+    """Search for event."""
+
+    events = Event.query.all()
+
+    genre = request.form["genre"]
+    location = request.form["location"]
+    date = request.form["date"]
+
+    for event in events:
+        if (genre == events.genres and location == events.location and date == events.date):
+            print(f"{events.name} {events.genres} {events.date} {events.location} {events.price} {events.image}")
+
+        else:
+            print(f"So sorry! No event found.")
+
+
+    return redirect("events.html")
+
+
 
 
 
@@ -31,7 +55,7 @@ def index():
 def register_form():
     """Show form for user signup."""
 
-    return render_template("register-form.html")
+    return render_template("register.html")
 
 
 @app.route('/register', methods=['POST'])
@@ -39,17 +63,19 @@ def register_process():
     """Process registration."""
 
     # Get form variables
+    fname = request.form["fname"]
+    lname = request.form["lname"]
     email = request.form["email"]
     password = request.form["password"]
     
 
-    new_user = User(email=email, password=password)
+    new_user = User(fname=fname, lname=lname, email=email, password=password)
 
     db.session.add(new_user)
     db.session.commit()
 
-    flash(f"User {email} added.")
-    return redirect(f"/users/{new_user.user_id}")
+    flash(f"{fname} welcome to DanceDestination.")
+    return redirect("/")
 
 
 @app.route('/login', methods=['GET'])
@@ -93,33 +119,31 @@ def logout():
 
 
 
-@app.route("/events/<music_genre>")
-def show_event(music_genre):
-    """Show info about event.
-    Also, provide a button to share and add."""
+@app.route("/events")
+def show_event():
+    """Show info about event."""
+
+    event_query = Event.query
+
+    # if there are no request.args
+    # just show all events
+        # set events to events.all()
+
+    # check for parameters
+    genre = request.args.get('genre')
+    if genre:
+        event_query = event_query.filter_by(genre=genre)
+
+    if location:
+        event_query = event_query.filter_by(...)
 
 
-    """If user is logged in let them add event."""    
-    # event = Event.query(music_genre)
-    # user_id = session.get("user_id")
-
-    # if user_id:
-    #     user_event_id = UserEvent.query.filter_by(
-    #         user_id=user_id, event_id=event_id).first()
-    # else:
-    #     user_event_id = None
+    events = event_query.all(). # Event.query.filter_by(genre=gerne).all()
+    return render_template("events.html")
 
 
 
-
-    return render_template("events.html", name=name,
-                                          date=date,
-                                          location=location,
-                                          price=price,
-                                          image=image)
-
-
-@app.route('/About')
+@app.route('/about')
 def about():
     """Homepage."""
     return render_template("about.html")
@@ -133,7 +157,8 @@ if __name__ == "__main__":
     app.jinja_env.auto_reload = app.debug
 
     connect_to_db(app)
-    app.config['SECRET_KEY'] = "<Something you can't guess!>"
+
+    app.config['SECRET_KEY'] = "<Something I don't want you to guess!>"
 
     # Use the DebugToolbar
     DebugToolbarExtension(app)

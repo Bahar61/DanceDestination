@@ -62,8 +62,7 @@ def load_events():
             date = None
 
 
-        event = Event(event_id=event_id,
-                      date=date,
+        event = Event(date=date,
                       location=location,
                       price=price)
 
@@ -81,8 +80,7 @@ def music_genre():
 
     print("Music Genre")
 
-    genre = Genre(genre_id=genre_id, 
-                  music_genre=music_genre)
+    genre = Genre(music_genre=music_genre)
 
     #add to the session to store
     db.session.add(genre)

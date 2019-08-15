@@ -1,35 +1,29 @@
-<html>
+<!DOCTYPE html>
 <head>
-    <link rel="stylesheet"
-          href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.css"/>
-    <link rel="stylesheet" href="/static/css/site.css"/>
+  <title>{% block title %}{% endblock %}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="http://code.jquery.com/jquery.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+  <link rel="stylesheet"
+        href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.css"/>
+  <link rel="stylesheet" href="/static/css/site.css"/>
 </head>
 
 <body>
 
-<div class="navbar navbar-inverse navbar-static-top">
-    <div class="container">
-
-        <div class="navbar-header">
-            <img src="/static/img/dance_logo.png">
-            <a class="navbar-brand" href="/">Dance Destination</a>
-        </div>
-
-        <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav navbar-right">
-                <li>
-                    <a href="/events">
-                        <img class="events"
-                             src="/static/img/dance_1.png">
-                        My Events
-                    </a>
-                </li>
-                <li><a href="/register">Log In</a></li>
-            </ul>
-        </div>
-
+<nav class="navbar navbar-inverse navbar-static-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <img src="/static/img/dance_logo.png" alt="">
+      <a class="navbar-brand" href="/">DanceDestination</a>
     </div>
-</div>
+    <ul class="nav navbar-nav navbar-right">
+      <li class="active"><a href="/events">Events</a></li>
+      <li><a href="register"><span class="glyphicon glyphicon-user"></span>Register</a></li>
+      <li><a href="login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+    </ul>
+  </div>
+</nav>
 
 <div class="container">
 
@@ -41,11 +35,17 @@
   {% endwith %}
 
   <!-- This is where the main content goes. -->
-  {% block body %}
-      BODY OF PAGE GOES HERE VIA INHERITANCE
+  {% block content %}
+
   {% endblock %}
 
-</div>
+
+  <!-- Footer -->
+<footer class="page-footer font-small black fixed-bottom">
+  <!-- Copyright -->
+  <div class="footer-copyright text-center">© 2019 Copyright: DanceDestination 
+  </div>
+</footer>
 
 </body>
 </html>
