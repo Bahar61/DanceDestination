@@ -2,7 +2,14 @@
 
 {% block title %}Events{% endblock %}
 
-{% block body %}
+{% block content %}
+
+    <h1> Here are your events:</h1>
+    {% for event in events %}
+        
+        <li>{{event}}</li>
+        
+    {% endfor %}
 
        
 

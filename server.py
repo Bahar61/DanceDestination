@@ -116,30 +116,69 @@ def logout():
     del session["user_id"]
     flash("Logged Out.")
     return redirect("/")
+def eventbrite_api_venue(venue_id):
 
+    from urllib import request
 
+    headers = {
+      'Authorization': 'Bearer VNEIADCZTTMUDAN7533X',
+      'Content-Type': 'application/json'
+    }
+    req = request.Request(f'https://www.eventbriteapi.com/v3/venues/{venue_id}/', headers=headers)
+
+    response_body = request.urlopen(req).read()
+    print(response_body)
+
+    return response_body    
+
+def eventbrite_api_request(location='San+Francisco',price='free',date=''):
+    """Request data from Eventbrite API with filters requested."""
+
+    from urllib import request
+
+    headers = {
+      'Authorization': 'Bearer VNEIADCZTTMUDAN7533X',
+      'Content-Type': 'application/json'
+    }
+    req = request.Request(f'https://www.eventbriteapi.com/v3/events/search/?q=dance&location.address={location}&price={price}&start_date.range_start={date}', headers=headers)
+
+    response_body = request.urlopen(req).read()
+    print(response_body)
+
+    return response_body
 
 @app.route("/events")
-def show_event():
+def show_events():
     """Show info about event."""
+
+    events = eventbrite_api_request() #Call Eventbrite API function in event page
 
     event_query = Event.query
 
-    # if there are no request.args
-    # just show all events
-        # set events to events.all()
 
     # check for parameters
+    location = request.args.get('location')
     genre = request.args.get('genre')
-    if genre:
-        event_query = event_query.filter_by(genre=genre)
+    date = request.args.get('date')
 
+
+    # check the users input and pass it to the API request
     if location:
-        event_query = event_query.filter_by(...)
+        event_query = event_query.filter_by(location=location)
+
+    if genre:
+        event_query = event_query.filter_by(genres=genres)
+
+    if date:
+        event_query = event_query.filter_by(date=date)
 
 
-    events = event_query.all(). # Event.query.filter_by(genre=gerne).all()
-    return render_template("events.html")
+    events = event_query.all()
+    print(event_query)
+
+    return render_template("events.html", events=events)
+
+
 
 
 

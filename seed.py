@@ -12,7 +12,6 @@ from server import app
 from datetime import datetime
 
 
-
 def load_users():
     """Load users from u.user into database."""
 
@@ -23,8 +22,7 @@ def load_users():
     User.query.delete()
 
     # Read u.user file and insert data
-    for row in open("seed_data/user_data"):
-        row = row.rstrip()
+   
         user_id, fname, lname, email, password = row.split("|")
 
         user = User(user_id=user_id,
@@ -51,7 +49,7 @@ def load_events():
     Event.query.delete()
 
     # Read event_data file and insert data
-    for row in open("seed_data/event_data"):
+    for row in open("seed_data/test_seed.py"):
         row = row.rstrip()
         event_id, date, location, price = row.split("|")
 
@@ -132,9 +130,7 @@ if __name__ == "__main__":
     db.create_all()
 
     # Import different types of data
-    load_users()
-    load_events()
-    music_genre()
+    load_eventbrite_data()
     user_event()
     event_genre()
     set_val_event_id()

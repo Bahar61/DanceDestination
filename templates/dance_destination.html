@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}DanceDestination{% endblock %}
+
+{% block content %}
+    <form action="/events" method="POST">
+        <input type="search" name="genre" placeholder="Music Genre">
+        <br>
+        <br>
+        <input type="text" name="location" placeholder="In">
+        <br>
+        <br>
+        <input type="date" name="date" placeholder="On">
+        <br>
+        <br>
+        <button>Search</button>
+    </form>
+
+{% endblock %}
