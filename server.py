@@ -1,12 +1,12 @@
 """Dance Destination."""
 
+from pprint import pformat
 from jinja2 import StrictUndefined 
-
 from flask_debugtoolbar import DebugToolbarExtension
-
-from flask import Flask, render_template, redirect, request, flash, session
-
+from flask import Flask, render_template, redirect, request, flash, session, redirect
 from model import User, Event, Genre, UserEvent, EventGenre, connect_to_db, db
+import requests
+import os
 
 app = Flask(__name__)
 
@@ -21,33 +21,70 @@ app.jinja_env.undefined = StrictUndefined
 def index():
     """Homepage."""
 
-   
     return render_template("dance_destination.html")
 
 
 
-
-@app.route('/', methods=['POST'])
+@app.route('/events', methods=['GET'])
 def search_event():
     """Search for event."""
 
-    events = Event.query.all()
 
-    genre = request.form["genre"]
-    location = request.form["location"]
-    date = request.form["date"]
+    genre = request.args.getlist('q')
+    print('\n\n\n\n')
+    print(genre)
+    location = request.args.get('location')
+    distance = request.args.get('distance')
+    measurement = request.args.get('measurement')
+    sort = request.args.get('sort')
+    dance = 'dance%2C+'
 
-    for event in events:
-        if (genre == events.genres and location == events.location and date == events.date):
-            print(f"{events.name} {events.genres} {events.date} {events.location} {events.price} {events.image}")
+   
+    # loop through genre list and return a string concattinate with 'dance'
+    music = '' 
+    for item in genre: 
+        music += item + ' dance,'
+    
 
+    # If the required information is in the request, look for event
+    if genre and location and distance and measurement:
+
+        # The Eventbrite API requires the location.within value to have the
+        # distance measurement as well
+        distance = distance + measurement
+
+        payload = {'q': music,
+                   'location.address': location,
+                   'location.within': distance,
+                   'sort_by': sort,
+                   }
+
+        os.environ['EVENTBRITE_TOKEN']
+        payload = {'token': os.environ['EVENTBRITE_TOKEN']}
+        base_url = 'https://www.eventbriteapi.com/v3'
+        token = os.environ.get('EVENTBRITE_TOKEN') 
+        headers = {'Authorization': f'Bearer {token}'}
+        response = requests.get(f'{base_url}/events/search', data=payload, headers=headers)
+        data = response.json()
+
+        # If the response was successful (with a status code of less than 400),
+        # use the list of events from the returned JSON
+        if response.ok:
+            events = data['events']
+
+        # If there was an error (status code between 400 and 600), use an empty list
         else:
-            print(f"So sorry! No event found.")
+            flash(f"No events: {data['error_description']}")
+            events = []
 
+        return render_template("events.html",
+                               data=pformat(data),
+                               results=events)
 
-    return redirect("events.html")
-
-
+    # If the required info isn't in the request, redirect to the search form
+    else:
+        flash("Please try with different information!")
+        return redirect("/")
 
 
 
@@ -58,16 +95,16 @@ def register_form():
     return render_template("register.html")
 
 
+
 @app.route('/register', methods=['POST'])
 def register_process():
     """Process registration."""
 
     # Get form variables
-    fname = request.form["fname"]
-    lname = request.form["lname"]
-    email = request.form["email"]
-    password = request.form["password"]
-    
+    fname = request.form['fname']
+    lname = request.form['lname']
+    email = request.form['email']
+    password = request.form['password']    
 
     new_user = User(fname=fname, lname=lname, email=email, password=password)
 
@@ -78,6 +115,7 @@ def register_process():
     return redirect("/")
 
 
+
 @app.route('/login', methods=['GET'])
 def login_form():
     """Show login form."""
@@ -85,13 +123,14 @@ def login_form():
     return render_template("login.html")
 
 
+
 @app.route('/login', methods=['POST'])
 def login_process():
     """Process login."""
 
     # Get form variables
-    email = request.form["email"]
-    password = request.form["password"]
+    email = request.form['email']
+    password = request.form['password']
 
     user = User.query.filter_by(email=email).first()
 
@@ -103,80 +142,52 @@ def login_process():
         flash("Incorrect password")
         return redirect("/login")
 
-    session["user_id"] = user.user_id
+    session['user_id'] = user.user_id
 
     flash("Logged in")
     return redirect(f"/users/{user.user_id}")
+
 
 
 @app.route('/logout')
 def logout():
     """Log out."""
 
-    del session["user_id"]
+    del session['user_id']
     flash("Logged Out.")
     return redirect("/")
-def eventbrite_api_venue(venue_id):
-
-    from urllib import request
-
-    headers = {
-      'Authorization': 'Bearer VNEIADCZTTMUDAN7533X',
-      'Content-Type': 'application/json'
-    }
-    req = request.Request(f'https://www.eventbriteapi.com/v3/venues/{venue_id}/', headers=headers)
-
-    response_body = request.urlopen(req).read()
-    print(response_body)
-
-    return response_body    
-
-def eventbrite_api_request(location='San+Francisco',price='free',date=''):
-    """Request data from Eventbrite API with filters requested."""
-
-    from urllib import request
-
-    headers = {
-      'Authorization': 'Bearer VNEIADCZTTMUDAN7533X',
-      'Content-Type': 'application/json'
-    }
-    req = request.Request(f'https://www.eventbriteapi.com/v3/events/search/?q=dance&location.address={location}&price={price}&start_date.range_start={date}', headers=headers)
-
-    response_body = request.urlopen(req).read()
-    print(response_body)
-
-    return response_body
-
-@app.route("/events")
-def show_events():
-    """Show info about event."""
-
-    events = eventbrite_api_request() #Call Eventbrite API function in event page
-
-    event_query = Event.query
+  
 
 
-    # check for parameters
-    location = request.args.get('location')
-    genre = request.args.get('genre')
-    date = request.args.get('date')
+# @app.route("/events")
+# def show_events():
+#     """Show info about events."""
+
+#     # event_query = Event.query
 
 
-    # check the users input and pass it to the API request
-    if location:
-        event_query = event_query.filter_by(location=location)
-
-    if genre:
-        event_query = event_query.filter_by(genres=genres)
-
-    if date:
-        event_query = event_query.filter_by(date=date)
+    # # check for parameters
+    # genre = request.args.get('genre')
+    # location = request.args.get('location')
+    # date = request.args.get('date')
+    
 
 
-    events = event_query.all()
-    print(event_query)
+    # # check the users input and pass it to the API request
+    # if location:
+    #     event_query = event_query.filter_by(location=location)
 
-    return render_template("events.html", events=events)
+    # if genre:
+    #     event_query = event_query.filter_by(genres=genres)
+
+    # if date:
+    #     event_query = event_query.filter_by(date=date)
+
+
+    # events = event_query.all()
+    # print(event_query)
+
+    # return render_template("events.html", events=events)
 
 
 

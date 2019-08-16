@@ -3,17 +3,44 @@
 {% block title %}DanceDestination{% endblock %}
 
 {% block content %}
-    <form action="/events" method="POST">
-        <input type="search" name="genre" placeholder="Music Genre">
-        <br>
-        <br>
-        <input type="text" name="location" placeholder="In">
-        <br>
-        <br>
-        <input type="date" name="date" placeholder="On">
-        <br>
-        <br>
-        <button>Search</button>
-    </form>
+<div class="row">
+
+    <div class="col-xs-12">
+
+      <h2>Search for Dance Events</h2>
+
+        <form action="/events">
+            <div class="form-group">
+                <h3>Choose your music genre:</h3>
+                <input type="checkbox" name="q" value="Jazz">Jazz
+                <input type="checkbox" name="q" value="Latin">Latin
+                <input type="checkbox" name="q" value="African Music">African Music
+                <input type="checkbox" name="q" value="Hip Hop">Hip Hop
+                <input type="checkbox" name="q" value="Electronic">Electronic
+            </div>
+            <div class="form-group">
+                <label for="event-loc">Location*</label>
+                <input id="event-loc" class="form-control" type="text" name="location" >
+            </div>
+            <div class="form-group">
+                <label for="loc-within">Distance*</label>
+                <input id="loc-within" class="form-control" type="number" name="distance" >
+                <select class="form-control" name="measurement">
+                    <option value="mi">miles</option>
+                    <option value="km">kilometers</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="sort-by">Sort by</label>
+                <select id="sort-by" class="form-control" name="sort">
+                    <option value="date">Date</option>
+                    <option value="distance">Distance</option>
+                    <option value="best">Best</option>
+                </select>
+            </div>
+
+            <input type="submit" value="Look for events!" class="btn btn-primary">
+
+        </form>
 
 {% endblock %}

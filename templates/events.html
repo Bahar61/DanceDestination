@@ -5,9 +5,11 @@
 {% block content %}
 
     <h1> Here are your events:</h1>
-    {% for event in events %}
+  {% for event in results%}
         
-        <li>{{event}}</li>
+        <li>
+            <a href="event.url">{{event.name.text}}</a>
+        </li>
         
     {% endfor %}
 
