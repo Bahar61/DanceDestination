@@ -7,6 +7,8 @@ from flask import Flask, render_template, redirect, request, flash, session, red
 from model import User, Event, Genre, UserEvent, EventGenre, connect_to_db, db
 import requests
 import os
+import json
+
 
 app = Flask(__name__)
 
@@ -30,48 +32,48 @@ def search_event():
     """Search for event."""
 
 
-    genre = request.args.getlist('q')
-    print('\n\n\n\n')
-    print(genre)
+    genres = request.args.getlist('genre')
     location = request.args.get('location')
     distance = request.args.get('distance')
     measurement = request.args.get('measurement')
     sort = request.args.get('sort')
-    dance = 'dance%2C+'
 
-   
-    # loop through genre list and return a string concattinate with 'dance'
-    music = '' 
-    for item in genre: 
-        music += item + ' dance,'
+
+    # loop through genre list and add 'dance' to each
+    query = []
+    for genre in genres:
+        query.append(f'{genre} dance')
     
 
     # If the required information is in the request, look for event
-    if genre and location and distance and measurement:
+    if genre or (location and distance and measurement):
 
         # The Eventbrite API requires the location.within value to have the
         # distance measurement as well
         distance = distance + measurement
 
-        payload = {'q': music,
+        payload = {'q': ', '.join(query),
                    'location.address': location,
                    'location.within': distance,
                    'sort_by': sort,
                    }
 
-        os.environ['EVENTBRITE_TOKEN']
-        payload = {'token': os.environ['EVENTBRITE_TOKEN']}
+        
         base_url = 'https://www.eventbriteapi.com/v3'
         token = os.environ.get('EVENTBRITE_TOKEN') 
         headers = {'Authorization': f'Bearer {token}'}
-        response = requests.get(f'{base_url}/events/search', data=payload, headers=headers)
+
+        response = requests.get(f'{base_url}/events/search', params=payload, headers=headers)
         data = response.json()
+        print('\n\n\n\n\n\n\n')
+        print(response.url)
+        
 
         # If the response was successful (with a status code of less than 400),
         # use the list of events from the returned JSON
         if response.ok:
             events = data['events']
-
+            
         # If there was an error (status code between 400 and 600), use an empty list
         else:
             flash(f"No events: {data['error_description']}")
@@ -83,7 +85,7 @@ def search_event():
 
     # If the required info isn't in the request, redirect to the search form
     else:
-        flash("Please try with different information!")
+        flash("Please enter all required information!")
         return redirect("/")
 
 

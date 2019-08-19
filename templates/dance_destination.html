@@ -12,19 +12,19 @@
         <form action="/events">
             <div class="form-group">
                 <h3>Choose your music genre:</h3>
-                <input type="checkbox" name="q" value="Jazz">Jazz
-                <input type="checkbox" name="q" value="Latin">Latin
-                <input type="checkbox" name="q" value="African Music">African Music
-                <input type="checkbox" name="q" value="Hip Hop">Hip Hop
-                <input type="checkbox" name="q" value="Electronic">Electronic
+                <input type="checkbox" name="genre" value="Jazz">Jazz
+                <input type="checkbox" name="genre" value="Latin">Latin
+                <input type="checkbox" name="genre" value="African Music">African Music
+                <input type="checkbox" name="genre" value="Hip Hop">Hip Hop
+                <input type="checkbox" name="genre" value="Electronic">Electronic
             </div>
             <div class="form-group">
                 <label for="event-loc">Location*</label>
-                <input id="event-loc" class="form-control" type="text" name="location" >
+                <input id="event-loc" class="form-control" type="text" name="location" required>
             </div>
             <div class="form-group">
                 <label for="loc-within">Distance*</label>
-                <input id="loc-within" class="form-control" type="number" name="distance" >
+                <input id="loc-within" class="form-control" type="number" name="distance" required>
                 <select class="form-control" name="measurement">
                     <option value="mi">miles</option>
                     <option value="km">kilometers</option>

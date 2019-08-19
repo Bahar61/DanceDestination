@@ -6,13 +6,24 @@
 
     <h1> Here are your events:</h1>
   {% for event in results%}
+    {% for key, value in event.items() %}
         
         <li>
-            <a href="event.url">{{event.name.text}}</a>
-        </li>
+            <!-- <h4>key : {{key}}</h4>
+            <h4>value : {{value}}</h4> -->
+            <h4>Name : {{event.name}}</h4>
+            <h4>Description : {{event.description}}</h4>
+            <h4>URL : {{event.url}}</h4>
+            <h4>Start : {{event.start}}</h4>
+            <h4>Price : {{event.is_free}}</h4>
+            <h4>Summary : {{event.summary}}</h4>
+            <h4>Location : {{event.venue_id}}</h4>
+            <h4>Category : {{event.category_id}} {{event.subcategory_id}}</h4>
+            <h4>{{event.logo}}</h4>
+
         
     {% endfor %}
-
+   {% endfor %}
        
 
 {% endblock %}
