@@ -46,7 +46,7 @@ def search_event():
     
 
     # If the required information is in the request, look for event
-    if genres or (location and distance and measurement):
+    if genres and (location and distance and measurement):
 
         # The Eventbrite API requires the location.within value to have the
         # distance measurement as well

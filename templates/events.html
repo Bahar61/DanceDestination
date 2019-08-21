@@ -9,6 +9,10 @@
         {% for event in results%}
         
             <li>
+                {% if event.logo %}
+                    <img src="{{event.logo.original.url}}", width="200">
+                {% endif %}
+
                 <p>Name : {{event.name.html|safe}}</p>
                 <p>Summary : {{event.summary|safe}}</p>
                 <p>URL : {{event.url|urlize}}</p>
