@@ -4,26 +4,19 @@
 
 {% block content %}
 
-    <h1> Here are your events:</h1>
-  {% for event in results%}
-    {% for key, value in event.items() %}
+<h2> Events List:</h2>
+    <ol>
+        {% for event in results%}
         
-        <li>
-            <!-- <h4>key : {{key}}</h4>
-            <h4>value : {{value}}</h4> -->
-            <h4>Name : {{event.name}}</h4>
-            <h4>Description : {{event.description}}</h4>
-            <h4>URL : {{event.url}}</h4>
-            <h4>Start : {{event.start}}</h4>
-            <h4>Price : {{event.is_free}}</h4>
-            <h4>Summary : {{event.summary}}</h4>
-            <h4>Location : {{event.venue_id}}</h4>
-            <h4>Category : {{event.category_id}} {{event.subcategory_id}}</h4>
-            <h4>{{event.logo}}</h4>
+            <li>
+                <p>Name : {{event.name.html|safe}}</p>
+                <p>Summary : {{event.summary|safe}}</p>
+                <p>URL : {{event.url|urlize}}</p>
+                <p>Start : {{event.start.local|safe}}</p>
+                <p>Description : {{event.description.html|safe}}</p>
+            </li>
 
-        
-    {% endfor %}
-   {% endfor %}
-       
+        {% endfor %}
+    </ol> 
 
 {% endblock %}

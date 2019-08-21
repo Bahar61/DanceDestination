@@ -1,9 +1,9 @@
 """Dance Destination."""
 
 from pprint import pformat
-from jinja2 import StrictUndefined 
+from jinja2 import StrictUndefined
 from flask_debugtoolbar import DebugToolbarExtension
-from flask import Flask, render_template, redirect, request, flash, session, redirect
+from flask import Flask, render_template, redirect, request, flash, session
 from model import User, Event, Genre, UserEvent, EventGenre, connect_to_db, db
 import requests
 import os
@@ -31,10 +31,10 @@ def index():
 def search_event():
     """Search for event."""
 
-
+    # parameters from homepage search form
     genres = request.args.getlist('genre')
-    location = request.args.get('location')
-    distance = request.args.get('distance')
+    location = request.args.get('location') or 'San Francisco'
+    distance = request.args.get('distance') or 25
     measurement = request.args.get('measurement')
     sort = request.args.get('sort')
 
@@ -46,15 +46,15 @@ def search_event():
     
 
     # If the required information is in the request, look for event
-    if genre or (location and distance and measurement):
+    if genres or (location and distance and measurement):
 
         # The Eventbrite API requires the location.within value to have the
         # distance measurement as well
-        distance = distance + measurement
+        within = f'{distance}{measurement}'
 
         payload = {'q': ', '.join(query),
                    'location.address': location,
-                   'location.within': distance,
+                   'location.within': within,
                    'sort_by': sort,
                    }
 
@@ -65,19 +65,19 @@ def search_event():
 
         response = requests.get(f'{base_url}/events/search', params=payload, headers=headers)
         data = response.json()
-        print('\n\n\n\n\n\n\n')
-        print(response.url)
         
-
         # If the response was successful (with a status code of less than 400),
         # use the list of events from the returned JSON
         if response.ok:
             events = data['events']
-            
+
+    
         # If there was an error (status code between 400 and 600), use an empty list
         else:
             flash(f"No events: {data['error_description']}")
             events = []
+        print('\n\n\n')
+        print(response.url)
 
         return render_template("events.html",
                                data=pformat(data),
@@ -87,7 +87,6 @@ def search_event():
     else:
         flash("Please enter all required information!")
         return redirect("/")
-
 
 
 @app.route('/register', methods=['GET'])
