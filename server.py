@@ -31,7 +31,7 @@ def index():
 def search_event():
     """Search for event."""
 
-    # parameters from homepage search form
+    # Get from variables.
     genres = request.args.getlist('genre')
     location = request.args.get('location') or 'San Francisco'
     distance = request.args.get('distance') or 25
@@ -52,13 +52,13 @@ def search_event():
         # distance measurement as well
         within = f'{distance}{measurement}'
 
-        payload = {'q': ', '.join(query),
+        payload = {'q': ', '.join(query), #join the list of multiple genre selection and turn them to str
                    'location.address': location,
                    'location.within': within,
                    'sort_by': sort,
                    }
 
-        
+        #Eventbrite API access and authentication 
         base_url = 'https://www.eventbriteapi.com/v3'
         token = os.environ.get('EVENTBRITE_TOKEN') 
         headers = {'Authorization': f'Bearer {token}'}
@@ -66,8 +66,7 @@ def search_event():
         response = requests.get(f'{base_url}/events/search', params=payload, headers=headers)
         data = response.json()
         
-        # If the response was successful (with a status code of less than 400),
-        # use the list of events from the returned JSON
+        # If the response was successful use the list of events from the returned JSON
         if response.ok:
             events = data['events']
 
@@ -76,8 +75,7 @@ def search_event():
         else:
             flash(f"No events: {data['error_description']}")
             events = []
-        print('\n\n\n')
-        print(response.url)
+        
 
         return render_template("events.html",
                                data=pformat(data),
@@ -85,7 +83,8 @@ def search_event():
 
     # If the required info isn't in the request, redirect to the search form
     else:
-        flash("Please enter all required information!")
+        flash("Please Enter All Required Information!")
+        
         return redirect("/")
 
 
@@ -112,7 +111,7 @@ def register_process():
     db.session.add(new_user)
     db.session.commit()
 
-    flash(f"{fname} welcome to DanceDestination.")
+    flash(f"{fname} Welcome to DanceDestination.")
     return redirect("/")
 
 
@@ -136,16 +135,16 @@ def login_process():
     user = User.query.filter_by(email=email).first()
 
     if not user:
-        flash("This email is not registered!")
+        flash("This Email Is Not Registered!")
         return redirect("/login")
 
     if user.password != password:
-        flash("Incorrect password")
+        flash("Incorrect Password!")
         return redirect("/login")
 
     session['user_id'] = user.user_id
 
-    flash("Logged in")
+    flash("Logged in!")
     return redirect(f"/users/{user.user_id}")
 
 
@@ -160,49 +159,15 @@ def logout():
   
 
 
-# @app.route("/events")
-# def show_events():
-#     """Show info about events."""
-
-#     # event_query = Event.query
-
-
-    # # check for parameters
-    # genre = request.args.get('genre')
-    # location = request.args.get('location')
-    # date = request.args.get('date')
-    
-
-
-    # # check the users input and pass it to the API request
-    # if location:
-    #     event_query = event_query.filter_by(location=location)
-
-    # if genre:
-    #     event_query = event_query.filter_by(genres=genres)
-
-    # if date:
-    #     event_query = event_query.filter_by(date=date)
-
-
-    # events = event_query.all()
-    # print(event_query)
-
-    # return render_template("events.html", events=events)
-
-
-
-
-
 @app.route('/about')
 def about():
     """Homepage."""
+
     return render_template("about.html")
 
 
 if __name__ == "__main__":
-    # We have to set debug=True here, since it has to be True at the
-    # point that we invoke the DebugToolbarExtension
+    # set debug=True here, to invoke the DebugToolbarExtension 
     app.debug = True
     # make sure templates, etc. are not cached in debug mode
     app.jinja_env.auto_reload = app.debug

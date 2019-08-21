@@ -1,4 +1,4 @@
-"""Models and database functions for Dance Event project."""
+"""Models and database functions for DanceDestination project."""
 
 from flask_sqlalchemy import SQLAlchemy
 
@@ -8,7 +8,7 @@ db = SQLAlchemy()
 # Model definitions
 
 class User(db.Model):
-    """User of event website."""
+    """User of website."""
 
     __tablename__ = "users"
     # user model class
@@ -63,7 +63,7 @@ class Event(db.Model):
 
     
 class Genre(db.Model):
-    """Music genre of dance event """
+    """Music genre."""
 
     __tablename__ = "genres"
     # music genre model class
@@ -82,7 +82,7 @@ class Genre(db.Model):
 
 
 class UserEvent(db.Model):
-    """User events"""
+    """User events."""
 
     __tablename__ = "users_event"
     # users event model class
@@ -102,7 +102,7 @@ class UserEvent(db.Model):
     
 
 class EventGenre(db.Model):
-    """Event music type"""
+    """Event music genre."""
 
     __tablename__ = "event_music"
     # event music type model class

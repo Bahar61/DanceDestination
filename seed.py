@@ -1,12 +1,7 @@
 """Utility file to seed dance_event database from MovieLens data in seed_data/"""
 
 from sqlalchemy import func
-from model import User
-from model import Event
-from model import Genre
-from model import UserEvent
-from model import EventGenre
-
+from model import User, Event, Genre, UserEvent, EventGenre
 from model import connect_to_db, db
 from server import app
 from datetime import datetime
