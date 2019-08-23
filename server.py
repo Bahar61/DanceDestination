@@ -26,7 +26,6 @@ def index():
     return render_template("dance_destination.html")
 
 
-
 @app.route('/events', methods=['GET'])
 def search_event():
     """Search for event."""
@@ -38,6 +37,7 @@ def search_event():
     measurement = request.args.get('measurement')
     sort = request.args.get('sort')
 
+    # response = get_eventbrite_data(genres, location...)
 
     # loop through genre list and add 'dance' to each
     query = []
@@ -52,7 +52,7 @@ def search_event():
         # distance measurement as well
         within = f'{distance}{measurement}'
 
-        payload = {'q': ', '.join(query), #join the list of multiple genre selection and turn them to str
+        payload = {'q': ','.join(query), #join the list of multiple genre selection and turn them to str
                    'location.address': location,
                    'location.within': within,
                    'sort_by': sort,
@@ -180,3 +180,4 @@ if __name__ == "__main__":
     DebugToolbarExtension(app)
 
     app.run(port=5000, host='0.0.0.0')
+

@@ -7,10 +7,8 @@ from server import app
 from datetime import datetime
 
 
-
 def load_users():
     """Load users from u.user into database."""
-
     print("Users")
 
     # Delete all rows in table, so if we need to run this a second time,
@@ -30,9 +28,8 @@ def load_users():
         # add to the session
         db.session.add(user)
 
-    #commit the work
+    # commit the work
     db.session.commit()
-
 
 
 def load_events():
@@ -52,21 +49,18 @@ def load_events():
         #convert string time to Datetime
         if date:
             date = datetime.strptime(date, "%d-%b-%Y")
-        else:
-            date = None
 
-
-        event = Event(date=date,
-                      location=location,
-                      price=price)
-
+        event = Event(
+            date=date,
+            location=location,
+            price=price,
+        )
 
         # add to the session to store
         db.session.add(event)
 
     # commit the work
     db.session.commit()
-
 
 
 def music_genre():
