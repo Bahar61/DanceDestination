@@ -4,7 +4,7 @@ from pprint import pformat
 from jinja2 import StrictUndefined
 from flask_debugtoolbar import DebugToolbarExtension
 from flask import Flask, render_template, redirect, request, flash, session
-from model import User, Event, Genre, UserEvent, EventGenre, connect_to_db, db
+from model import User, Event, UserEvent, connect_to_db, db
 import requests
 import os
 import json

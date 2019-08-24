@@ -41,46 +41,31 @@ class Event(db.Model):
     # event model class
 
     event_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    name = db.Column(db.String(70), nullable=False)
-    date = db.Column(db.DateTime, nullable=False)
-    location = db.Column(db.String(70), nullable=False)
+    name = db.Column(db.String(100), nullable=False)
+    date = db.Column(db.String(100), nullable=False)
+    location = db.Column(db.String(100), nullable=False)
     price = db.Column(db.Float, nullable=True)
-    image = db.Column(db.String(100))
-
-    genres = db.relationship('Genre',
-                             secondary='event_music',
-                             backref='events')
+    genre = db.Column(db.String(300), nullable=False)
+    age = db.Column(db.Integer, nullable=True)
+    organizer = db.Column(db.String(100), nullable=True)
+    link = db.Column(db.String(300), nullable=True)
     
 
     def __repr__(self):
         """Provide helpful representation when printed."""
 
-        return f"""<Event event_id={self.event_id} 
-                                   date={self.date.strftime('%d-%b-%Y')} 
-                                   location={self.location}
-                                    price={self.price}>"""
+        return f"""<event_id={self.event_id}
+                    name={self.name}
+                    date={self.date}
+                    location={self.location}
+                    price={self.price}
+                    genre={self.genre}
+                    age={self.age}
+                    organizer={self.organizer}
+                    link={self.link}>"""
 
 
     
-class Genre(db.Model):
-    """Music genre."""
-
-    __tablename__ = "genres"
-    # music genre model class
-
-    genre_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    music_genre = db.Column(db.String(70), nullable=False)
-    
-
-
-    def __repr__(self):
-        """Provide helpful representation when printed."""
-
-        return f"""<Genre genre_id={self.genre_id} 
-                                   music_genre={self.music_genre}>"""
-
-
-
 class UserEvent(db.Model):
     """User events."""
 
@@ -101,24 +86,6 @@ class UserEvent(db.Model):
                    event_id={self.event_id}>"""
     
 
-class EventGenre(db.Model):
-    """Event music genre."""
-
-    __tablename__ = "event_music"
-    # event music type model class
-
-    event_music_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    genre_id = db.Column(db.Integer,
-                         db.ForeignKey('genres.genre_id'))
-    event_id = db.Column(db.Integer, 
-                        db.ForeignKey('events.event_id'))
-    
-    def __repr__(self):
-        """Provide helpful representation when printed."""
-
-        return f"""<EventGenre event_music_id={self.event_music_id} 
-                                          genre_id={self.genre_id} 
-                                          event_id={self.event_id}>"""
 
 ##############################################################################
 # Helper functions

@@ -1,7 +1,32 @@
 body > nav > div > div > img {
-    width: 3rem;   
+    height: 40px; 
+    width: auto;  
+    margin-top: 5px;
+}
+body > nav {
+    height: 10px;
 }
 img {
-    width: 175px;
+    width: 30%;
+    height: 20rem;
 }
 
+#footer_image > img{
+    width: 33%;
+    height: 50rem;
+    margin-top: 20px;
+}
+
+body > div > div.row > form > input{
+    background-color: #FFA500;
+    color: #800080;
+
+}
+
+h3{
+    color: #990000;
+}
+
+h5 {
+    color:  #ff9999;
+}

@@ -7,24 +7,35 @@
 
     <div class="col-xs-12">
 
-      <h2>Search for Dance Events</h2>
+        <section id="header_image">
+            <table id="fheader_img_table">
+                <tr id="img1"><img src="static/img/dance_4.jpg"></tr>
+                <tr id="img2"><img src="static/img/dance_5.jpg"></tr>
+                <tr id="img3"><img src="static/img/dance_7.jpg"></tr>
+            </table>
+        </section>
+    </div>
 
-        <form action="/events">
+        <form action="/events" class="col-xs-4 offset-xs-3">
+            
+            <h3>Search for Dance Events</h3>
+
             <div class="form-group">
-                <h3>Choose your music genre:</h3>
-                <input type="checkbox" name="genre" value="Jazz">Jazz
-                <br>
-                <input type="checkbox" name="genre" value="Latin">Latin
-                <input type="checkbox" name="genre" value="Tango">Tango
-                <input type="checkbox" name="genre" value="Salsa">Salsa
-                <br>
-                <input type="checkbox" name="genre" value="African">African
-                <br>
-                <input type="checkbox" name="genre" value="Hip Hop">Hip Hop
-                <br>
-                <input type="checkbox" name="genre" value="Electronic">Electronic
-                <input type="checkbox" name="genre" value="House">House
-                
+                <h5>Choose your music genre:</h5>
+                <select>
+                    <option name="genre" value="Jazz">Jazz</option>
+                    <br>
+                    <option name="genre" value="Latin">Latin</option>
+                    <option name="genre" value="Tango">Tango</option>
+                    <option name="genre" value="Salsa">Salsa</option>
+                    <br>
+                    <option name="genre" value="African">African</option>
+                    <br>
+                    <option name="genre" value="Hip Hop">Hip Hop</option>
+                    <br>
+                    <option name="genre" value="Electronic">Electronic</option>
+                    <option name="genre" value="House">House</option>
+                </select>
                 
 
             </div>
@@ -50,7 +61,17 @@
             </div>
 
             <input type="submit" value="Look for events!" class="btn btn-primary">
-
         </form>
+    </div>
+
+    <div class="col-xs-12">
+        <section id="footer_image">
+            <table id="footer_img_table">
+                <tr id="img1"><img src="static/img/dance_1.jpg"></tr>
+                <tr id="img2"><img src="static/img/dance_2.jpg"></tr>
+                <tr id="img3"><img src="static/img/dance_3.jpg"></tr>
+            </table>      
+        </section>
+    </div>
 
 {% endblock %}

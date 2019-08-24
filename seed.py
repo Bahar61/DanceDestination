@@ -1,10 +1,10 @@
 """Utility file to seed dance_event database from MovieLens data in seed_data/"""
 
 from sqlalchemy import func
-from model import User, Event, Genre, UserEvent, EventGenre
+from model import User, Event, UserEvent
 from model import connect_to_db, db
 from server import app
-from datetime import datetime
+import 19hz
 
 
 def load_users():
@@ -42,38 +42,24 @@ def load_events():
     Event.query.delete()
 
     # Read event_data file and insert data
-    for row in open("seed_data/test_seed.py"):
-        row = row.rstrip()
-        event_id, date, location, price = row.split("|")
-
-        #convert string time to Datetime
-        if date:
-            date = datetime.strptime(date, "%d-%b-%Y")
-
+    open("seed_data/19hz.py")
+        
         event = Event(
+            event_id=event_id,
+            name=name,
             date=date,
             location=location,
             price=price,
-        )
+            genre=genre,
+            age=age,
+            organizer=organizer,
+            link=link,
+            )
 
         # add to the session to store
         db.session.add(event)
 
     # commit the work
-    db.session.commit()
-
-
-def music_genre():
-    """."""
-
-    print("Music Genre")
-
-    genre = Genre(music_genre=music_genre)
-
-    #add to the session to store
-    db.session.add(genre)
-
-    #commit the work
     db.session.commit()
 
 
@@ -95,24 +81,6 @@ def user_event():
 
 
 
-def event_genre():
-    """Load event genre """
-
-    print("Event Genre")
-
-    eventgenre = EventGenre(event_music_id=event_music_id,
-                           genre_id=genre_id,
-                           event_id=event_id)
-
-
-    #add to the session to store
-    db.session.add(eventgenre)
-
-    #commit the work
-    db.session.commit()
-
-
-
 if __name__ == "__main__":
     connect_to_db(app)
 
@@ -120,8 +88,8 @@ if __name__ == "__main__":
     db.create_all()
 
     # Import different types of data
-    load_eventbrite_data()
+    load_users()
+    load_events()
     user_event()
-    event_genre()
-    set_val_event_id()
-    set_val_user_id()
+
+   
