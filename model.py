@@ -41,14 +41,13 @@ class Event(db.Model):
     # event model class
 
     event_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    name = db.Column(db.String(100), nullable=False)
-    date = db.Column(db.String(100), nullable=False)
-    location = db.Column(db.String(100), nullable=False)
-    price = db.Column(db.Float, nullable=True)
-    genre = db.Column(db.String(300), nullable=False)
-    age = db.Column(db.Integer, nullable=True)
-    organizer = db.Column(db.String(100), nullable=True)
-    link = db.Column(db.String(300), nullable=True)
+    name = db.Column(db.String(500), nullable=False)
+    date = db.Column(db.String(500), nullable=False)
+    location = db.Column(db.String(500), nullable=False)
+    genre = db.Column(db.String(500), nullable=False)
+    price_age = db.Column(db.String(500), nullable=True)
+    organizer = db.Column(db.String(500), nullable=True)
+    link = db.Column(db.String(500), nullable=True)
     
 
     def __repr__(self):
@@ -58,9 +57,8 @@ class Event(db.Model):
                     name={self.name}
                     date={self.date}
                     location={self.location}
-                    price={self.price}
                     genre={self.genre}
-                    age={self.age}
+                    price_age={self.price_age}
                     organizer={self.organizer}
                     link={self.link}>"""
 

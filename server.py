@@ -31,28 +31,26 @@ def search_event():
     """Search for event."""
 
     # Get from variables.
-    genres = request.args.getlist('genre')
+    genre = request.args.get('genre')
     location = request.args.get('location') or 'San Francisco'
     distance = request.args.get('distance') or 25
     measurement = request.args.get('measurement')
     sort = request.args.get('sort')
 
-    # response = get_eventbrite_data(genres, location...)
+    # response = get_eventbrite_data(genre, location...)
 
     # loop through genre list and add 'dance' to each
-    query = []
-    for genre in genres:
-        query.append(f'{genre} dance')
     
-
+    
+    print(genre, location, distance, measurement)    
     # If the required information is in the request, look for event
-    if genres and (location and distance and measurement):
+    if genre and (location and distance and measurement):
 
         # The Eventbrite API requires the location.within value to have the
         # distance measurement as well
         within = f'{distance}{measurement}'
 
-        payload = {'q': ','.join(query), #join the list of multiple genre selection and turn them to str
+        payload = {'q': f'{genre} dance', #join the list of multiple genre selection and turn them to str
                    'location.address': location,
                    'location.within': within,
                    'sort_by': sort,
@@ -76,6 +74,12 @@ def search_event():
             flash(f"No events: {data['error_description']}")
             events = []
         
+        if genre == 'Electronic':
+            Event.query.all()
+            return render_template("events.html",
+                               data=pformat(data),
+                               results=events)
+
 
         return render_template("events.html",
                                data=pformat(data),
@@ -111,6 +115,8 @@ def register_process():
     db.session.add(new_user)
     db.session.commit()
 
+    session['user_id'] = user.user_id
+
     flash(f"{fname} Welcome to DanceDestination.")
     return redirect("/")
 
@@ -145,7 +151,7 @@ def login_process():
     session['user_id'] = user.user_id
 
     flash("Logged in!")
-    return redirect(f"/users/{user.user_id}")
+    return redirect(f"/")
 
 
 

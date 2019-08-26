@@ -19,15 +19,18 @@
     </div>
     <ul class="nav navbar-nav navbar-right">
       <li class="active"><a href="/events">Events</a></li>
-      <li><a href="/register"><span class="glyphicon glyphicon-user"></span>Register</a></li>
-      <li><a href="/login"><span class="glyphicon glyphicon-log-in"></span>Login</a></li>
+      {% if session.get("user_id") %}
+        <li><a href="/logout"><span></span>Logout</a></li>
+        {% else %}
+        <li><a href="/register"><span class="glyphicon glyphicon-user"></span>Register</a></li>
+        <li><a href="/login"><span class="glyphicon glyphicon-log-in"></span>Login</a></li>
+      {% endif %}
       <li><a href="/about">About</a></li>
     </ul>
   </div>
 </nav>
 
 <div class="container">
-
   <!-- Show flashed messages -->
   {% with messages = get_flashed_messages() %}
       {% for message in messages %}

@@ -4,29 +4,23 @@ from sqlalchemy import func
 from model import User, Event, UserEvent
 from model import connect_to_db, db
 from server import app
-import 19hz
-
 
 def load_users():
     """Load users from u.user into database."""
     print("Users")
 
-    # Delete all rows in table, so if we need to run this a second time,
-    # we won't be trying to add duplicate users
-    User.query.delete()
 
     # Read u.user file and insert data
-   
-        user_id, fname, lname, email, password = row.split("|")
+    fname, lname, email, password = ('Test', 'Test', 'test@test.com', '12345678')
 
-        user = User(user_id=user_id,
-                    fname=fname, 
-                    lname=lname,
-                    email=email,
-                    password=password)
+    user = User(fname=fname, 
+                lname=lname,
+                email=email,
+                password=password,
+                )
 
-        # add to the session
-        db.session.add(user)
+    # add to the session
+    db.session.add(user)
 
     # commit the work
     db.session.commit()
@@ -37,21 +31,17 @@ def load_events():
 
     print("Events")
 
-    # Delete all rows in table, so if we need to run this a second time,
-    # we won't be trying to add duplicate movies
-    Event.query.delete()
-
     # Read event_data file and insert data
-    open("seed_data/19hz.py")
+    for row in open("seed_data/19hz_scrape.csv"):
+        row = row.rstrip()
+        name, location, date, genre, price_age, organizer, link = row.split('\t')
         
         event = Event(
-            event_id=event_id,
             name=name,
-            date=date,
             location=location,
-            price=price,
+            date=date,
             genre=genre,
-            age=age,
+            price_age=price_age,
             organizer=organizer,
             link=link,
             )
@@ -59,7 +49,7 @@ def load_events():
         # add to the session to store
         db.session.add(event)
 
-    # commit the work
+        # commit the work
     db.session.commit()
 
 
@@ -68,9 +58,13 @@ def user_event():
     """Load user event"""
     print("User Event")
 
-    userevent = UserEvent(user_event_id=user_event_id,
-                          user_id=user_id,
-                          event_id=event_id)
+    
+    user_id = int(user_id) 
+    event_id = int(event_id) 
+
+    userevent = UserEvent(user_id=user_id,
+                          event_id=event_id,
+                          )
 
 
      #add to the session to store
@@ -90,6 +84,6 @@ if __name__ == "__main__":
     # Import different types of data
     load_users()
     load_events()
-    user_event()
+    # user_event()
 
    
