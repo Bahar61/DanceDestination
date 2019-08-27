@@ -36,13 +36,7 @@ def search_event():
     distance = request.args.get('distance') or 25
     measurement = request.args.get('measurement')
     sort = request.args.get('sort')
-
-    # response = get_eventbrite_data(genre, location...)
-
-    # loop through genre list and add 'dance' to each
-    
-    
-    print(genre, location, distance, measurement)    
+      
     # If the required information is in the request, look for event
     if genre and (location and distance and measurement):
 
@@ -63,27 +57,29 @@ def search_event():
 
         response = requests.get(f'{base_url}/events/search', params=payload, headers=headers)
         data = response.json()
-        
+        elect_events = []
+
+        # If genre is Electronic pull data from database where 19hz website results is saved.
+        if genre == 'Electronic':
+            elect_events = Event.query.all() 
+
+
         # If the response was successful use the list of events from the returned JSON
         if response.ok:
             events = data['events']
 
-    
         # If there was an error (status code between 400 and 600), use an empty list
         else:
             flash(f"No events: {data['error_description']}")
             events = []
         
-        if genre == 'Electronic':
-            Event.query.all()
-            return render_template("events.html",
-                               data=pformat(data),
-                               results=events)
-
 
         return render_template("events.html",
                                data=pformat(data),
-                               results=events)
+                               eventbrite_results=events,
+                               elect_results=elect_events,
+                               genre=genre,
+                               )
 
     # If the required info isn't in the request, redirect to the search form
     else:
@@ -150,7 +146,7 @@ def login_process():
 
     session['user_id'] = user.user_id
 
-    flash("Logged in!")
+    flash(f"{fname}Logged in!")
     return redirect(f"/")
 
 
@@ -160,7 +156,7 @@ def logout():
     """Log out."""
 
     del session['user_id']
-    flash("Logged Out.")
+    flash(f"{fname} You Are Logged Out.")
     return redirect("/")
   
 

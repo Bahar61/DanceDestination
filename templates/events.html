@@ -6,7 +6,7 @@
 
 <h2> Events List:</h2>
     <ol>
-        {% for event in results%}
+        {% for event in eventbrite_results %}
         
             <li>
                 {% if event.logo %}
@@ -21,6 +21,19 @@
             </li>
 
         {% endfor %}
+
+        {% for event in elect_results %}
+                <li>
+                    <p>Name : {{ event.name }}</p>
+                    <p>Location : {{ event.location }}</p>
+                    <p>Date : {{ event.date }}</p>
+                    <p>Genre : {{ event.genre }}</p>
+                    <p>Price and Age : {{ event.price_age }}</p>
+                    <p>Organizer : {{ event.organizer }}</p>
+                    <p>Link : {{ event.link | urlize }}</p>
+                </li>
+        {% endfor %}
+
     </ol> 
 
 {% endblock %}
