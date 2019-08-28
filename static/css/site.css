@@ -3,9 +3,7 @@ body > nav > div > div > img {
     width: auto;  
     margin-top: 5px;
 }
-body > nav {
-    height: 10px;
-}
+
 img {
     width: 30%;
     height: 20rem;

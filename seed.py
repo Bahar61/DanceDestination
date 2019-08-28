@@ -5,12 +5,12 @@ from model import User, Event, UserEvent
 from model import connect_to_db, db
 from server import app
 
-def load_users():
-    """Load users from u.user into database."""
+def create_users():
+    """Create users and insert into database."""
     print("Users")
 
 
-    # Read u.user file and insert data
+    # Test user for testing
     fname, lname, email, password = ('Test', 'Test', 'test@test.com', '12345678')
 
     user = User(fname=fname, 
@@ -27,11 +27,11 @@ def load_users():
 
 
 def load_events():
-    """Load events from event_data into database."""
+    """Load events from csv file into database."""
 
     print("Events")
 
-    # Read event_data file and insert data
+    # Read data from 19hz wbsite and insert data to database
     for row in open("seed_data/19hz_scrape.csv"):
         row = row.rstrip()
         name, location, date, genre, price_age, organizer, link = row.split('\t')

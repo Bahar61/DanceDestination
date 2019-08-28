@@ -16,7 +16,7 @@
         </section>
     </div>
 
-        <form action="/events" class="col-xs-4 offset-xs-3">
+        <form action="/events" class="col-xs-5">
             
             <h3>Search for Dance Events</h3>
 
@@ -39,8 +39,10 @@
 
             </div>
             <div class="form-group">
+
                 <label for="event-loc">Location*</label>
                 <input id="event-loc" class="form-control" type="text" name="location" placeholder="San Francisco">
+
             </div>
             <div class="form-group">
                 <label for="loc-within">Distance*</label>
@@ -72,5 +74,8 @@
             </table>      
         </section>
     </div>
+
+{% endblock %}
+{% block scripts %}
 
 {% endblock %}

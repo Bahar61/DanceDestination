@@ -36,7 +36,7 @@ def search_event():
     distance = request.args.get('distance') or 25
     measurement = request.args.get('measurement')
     sort = request.args.get('sort')
-      
+          
     # If the required information is in the request, look for event
     if genre and (location and distance and measurement):
 
@@ -44,7 +44,7 @@ def search_event():
         # distance measurement as well
         within = f'{distance}{measurement}'
 
-        payload = {'q': f'{genre} dance', #join the list of multiple genre selection and turn them to str
+        payload = {'q': f'{genre} dance', # Add dance to genre for Eventbrite search
                    'location.address': location,
                    'location.within': within,
                    'sort_by': sort,
@@ -98,7 +98,7 @@ def register_form():
 
 @app.route('/register', methods=['POST'])
 def register_process():
-    """Process registration."""
+    """Process registration and add new user to database."""
 
     # Get form variables
     fname = request.form['fname']
@@ -106,15 +106,22 @@ def register_process():
     email = request.form['email']
     password = request.form['password']    
 
-    new_user = User(fname=fname, lname=lname, email=email, password=password)
+    user = User.query.filter_by(email=email).first()
 
-    db.session.add(new_user)
-    db.session.commit()
+    if email == user.email:
+        flash("We have danced before! Please Log In!")
+        return redirect("/register")
+    else:
+        new_user = User(fname=fname, lname=lname, email=email, password=password)
 
-    session['user_id'] = user.user_id
+        db.session.add(new_user)
+        db.session.commit()
 
-    flash(f"{fname} Welcome to DanceDestination.")
-    return redirect("/")
+        
+        session['user_id'] = user.user_id
+
+        flash(f"{user.fname} Welcome! Shall we dance?.")
+        return redirect("/")
 
 
 
@@ -137,16 +144,17 @@ def login_process():
     user = User.query.filter_by(email=email).first()
 
     if not user:
-        flash("This Email Is Not Registered!")
+        flash("We haven't danced yet!")
         return redirect("/login")
 
     if user.password != password:
-        flash("Incorrect Password!")
+        print(user.password)
+        flash("Last time you didn't use this password!")
         return redirect("/login")
 
     session['user_id'] = user.user_id
 
-    flash(f"{fname}Logged in!")
+    flash(f"{user.fname} shall we dance again?")
     return redirect(f"/")
 
 
@@ -156,7 +164,7 @@ def logout():
     """Log out."""
 
     del session['user_id']
-    flash(f"{fname} You Are Logged Out.")
+    flash(f"You are already missed! Please come back!")
     return redirect("/")
   
 
