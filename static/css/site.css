@@ -12,17 +12,19 @@ img {
 #footer_image > img{
     width: 33%;
     height: 50rem;
-    margin-top: 20px;
+    margin-top: 40px;
 }
 
 body > div > div.row > form > input{
     background-color: #FFA500;
-    color: #800080;
+    color: red;
+    border: 2px solid red;
 
 }
 
-h3{
-    color: #990000;
+h4{
+    color: darkorange;
+    margin: 20px;
 }
 
 h5 {
