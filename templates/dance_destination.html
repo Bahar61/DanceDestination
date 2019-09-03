@@ -9,18 +9,22 @@
 
         <section id="header_image">
             <table id="fheader_img_table">
-                <tr id="img1"><img src="static/img/dance_4.jpg"></tr>
-                <tr id="img2"><img src="static/img/dance_5.jpg"></tr>
-                <tr id="img3"><img src="static/img/dance_7.jpg"></tr>
+                <tr id="img1"><img src="static/img/dance_1.jpg"></tr>
+                <tr id="img2"><img src="static/img/dance_2.jpg"></tr>
+                <tr id="img3"><img src="static/img/dance_3.jpg"></tr>
+                <tr id="img4"><img src="static/img/dance_4.jpg"></tr>
             </table>
         </section>
     </div>
     
-    <h4>What Are You in the Mood Today?</h4>
-        <form action="/events" class="col-xs-5">
+    <div id="title" class="col-md-4">
+        <h4>What</h4><h4>Are</h4><h4>You</h4><h4>in</h4><h4>the</h4><h4>Mood</h4><h4>Today?</h4>
+    </div>
+
+        <form action="/events" class="col-md-5">
 
             <div class="form-group">
-                <h5>Choose your music genre:</h5>
+                <label for="music_genre">Music Genre*</label>
                 <select name="genre">
                     <option value="Jazz">Jazz</option>
                     <br>
@@ -34,8 +38,6 @@
                     <br>
                     <option value="Electronic">Electronic</option>
                 </select>
-                
-
             </div>
             <div class="form-group">
 
@@ -46,6 +48,7 @@
             <div class="form-group">
                 <label for="loc-within">Distance*</label>
                 <input id="loc-within" class="form-control" type="number" name="distance" placeholder="25">
+                <br>
                 <select class="form-control" name="measurement">
                     <option value="mi">miles</option>
                     <option value="km">kilometers</option>
@@ -59,17 +62,16 @@
                     <option value="best">Best</option>
                 </select>
             </div>
-
-            <input type="submit" value="Look for events!" class="btn btn-primary">
+            <input type="submit" value="Look for Events!" class="btn btn-primary">
         </form>
     </div>
-
     <div class="col-xs-12">
         <section id="footer_image">
             <table id="footer_img_table">
-                <tr id="img1"><img src="static/img/dance_1.jpg"></tr>
-                <tr id="img2"><img src="static/img/dance_2.jpg"></tr>
-                <tr id="img3"><img src="static/img/dance_3.jpg"></tr>
+                <tr id="img1"><img src="static/img/dance_5.jpg"></tr>
+                <tr id="img2"><img src="static/img/dance_6.jpg"></tr>
+                <tr id="img3"><img src="static/img/dance_7.jpg"></tr>
+                <tr id="img4"><img src="static/img/dance_8.jpg"></tr>
             </table>      
         </section>
     </div>

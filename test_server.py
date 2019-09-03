@@ -2,11 +2,13 @@
 
 import server
 import unittest
+from model import connect_to_db, db, User
+from server import app
 
 class TestFlaskRoutes(unittest.TestCase):
     """Test Flask routes."""
 
-    def index(self):
+    def test_index(self):
         """Check index page returns correct HTML."""
 
         # Create a test client
@@ -16,37 +18,66 @@ class TestFlaskRoutes(unittest.TestCase):
         result = client.get('/')
 
         # Compare result.data with assert method
-        self.assertIn(b'<h4>What Are You in the Mood Today?</h4>', result.data)
+        self.assertIn(b'Music Genre*', result.data)
     
-    def search_event(self):
+    def test_search_event(self):
         """Test that /events route processes form data correctly."""
 
         client = server.app.test_client()
-        result = client.post('/events', data={'genre' : 'Jazz'})
+        result = client.get('/events', query_string={'genre' : 'Jazz',
+                                            'location' : 'San Francisco',
+                                            'distance' : '25',
+                                            'measurement' : 'mi' }, 
+                                            follow_redirects=True)
 
-        self.assertIn(b'<h2> Events List:</h2>', result.data)
+        # self.assertEqual(result.status_code, 200)
+        self.assertIn(b'Events List:', result.data)
 
 
 class MyAppIntegrationTestCase(unittest.TestCase):
     """Integration test: testing Flask server."""
 
     def setUp(self):
+        # Connect to database
+        connect_to_db(server.app)
+
         self.client = server.app.test_client()
         server.app.config['TESTING'] = True
 
     def tearDown(self):
+        User.query.filter_by(email='ba@some.com').delete()
+        
         return
         
-    def register_form(self):
+    def test_register_form(self):
         result = self.client.get('/register')
+        self.assertEqual(result.status_code, 200)
         self.assertIn(b'<h1>Register</h1>', result.data)
         
-    def register_process(self):
+    def test_existing_user_register_process(self):
         result = self.client.post('/register', data={'fname' : 'Test',
                                                      'lname' : 'Test',
                                                      'email' : 'test@test.com',
-                                                     'password' : 'testtest'})
-        self.assertIn(b'<h4>What Are You in the Mood Today?</h4>', result.data)
+                                                     'password' : '12345678'}, 
+                                                     follow_redirects=True)
+        self.assertIn(b'We have danced before! Please Log In!', result.data)
+
+    def test_register_process(self):
+        result = self.client.post('/register', data={'fname' : 'B',
+                                                     'lname' : 'A',
+                                                     'email' : 'ba@some.com',
+                                                     'password' : '12345678'}, 
+                                                     follow_redirects=True)
+        self.assertIn(b'Welcome! Shall we dance?', result.data)
+
+
+    def test_login(self):
+        """Test login page."""
+
+        result = self.client.post("/login",
+                                  data={"email": "test@test.com", "password": "12345678"},
+                                  follow_redirects=True)
+        self.assertIn(b"shall we dance again?", result.data)
         
 
     

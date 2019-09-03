@@ -32,11 +32,11 @@ def search_event():
 
     # Get from variables.
     genre = request.args.get('genre')
-    location = request.args.get('location') or 'San Francisco'
-    distance = request.args.get('distance') or 25
-    measurement = request.args.get('measurement')
+    location = request.args.get('location', 'San Francisco')
+    distance = request.args.get('distance', 25)
+    measurement = request.args.get('measurement', 'mi')
     sort = request.args.get('sort')
-          
+
     # If the required information is in the request, look for event
     if genre and (location and distance and measurement):
 
@@ -108,7 +108,7 @@ def register_process():
 
     user = User.query.filter_by(email=email).first()
 
-    if email == user.email:
+    if user:
         flash("We have danced before! Please Log In!")
         return redirect("/register")
     else:
@@ -118,9 +118,9 @@ def register_process():
         db.session.commit()
 
         
-        session['user_id'] = user.user_id
+        session['user_id'] = new_user.user_id
 
-        flash(f"{user.fname} Welcome! Shall we dance?.")
+        flash(f"{new_user.fname} Welcome! Shall we dance?")
         return redirect("/")
 
 

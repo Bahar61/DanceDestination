@@ -1,25 +1,30 @@
-body > nav > div > div > img {
+body {
+    background: #EAE7E3 url('../img/dance_9.jpg') no-repeat center;
+    background-size: cover;    
+}
+div::after{
+     
+}
+body > nav > div > div > img{
     height: 40px; 
     width: auto;  
     margin-top: 5px;
 }
 
 img {
-    width: 30%;
-    height: 20rem;
+    width: 25%;
+    height: 15rem;
 }
 
 #footer_image > img{
-    width: 33%;
-    height: 50rem;
+    width: 25%;
+    height: 25rem;
     margin-top: 40px;
 }
 
-body > div > div.row > form > input{
-    background-color: #FFA500;
-    color: red;
-    border: 2px solid red;
-
+.btn-primary{
+    background-color: #65BCFE;
+    border: 2px solid #65F4FE;
 }
 
 h4{
@@ -27,6 +32,58 @@ h4{
     margin: 20px;
 }
 
-h5 {
-    color:  #ff9999;
+body > div > div.row > form{
+   
+    line-height: 3;
+
+}
+
+body > div > div.row > form > div:nth-child(1) > label{
+    color : #DB0ED4;
+}
+body > div > div.row > form > div:nth-child(2) > label{
+    color: #3CBF15;
+}
+body > div > div.row > form > div:nth-child(3) > label{
+    color: #FEC21D;
+}
+body > div > div.row > form > div:nth-child(4) > label{
+    color: #B31DFE;
+}
+
+#title {
+    display: inline-flex;
+    }
+h4 {
+    margin: 5px; 
+}
+#title > h4:nth-child(1){
+    color : #E89427;
+    margin-left: 15px;
+}
+#title > h4:nth-child(2){
+    color: #D51111;
+}
+#title > h4:nth-child(3){
+    color: #0CE0E8;
+}
+#title > h4:nth-child(4){
+    color: #FE98F4;
+}
+#title > h4:nth-child(5){
+    color: #FE7701;
+}
+#title > h4:nth-child(6){
+    color: #3FB8FE;
+}
+#title > h4:nth-child(7){
+    color: #8251D5;
+}
+.form-control, body > div > div.row > form > div:nth-child(1) > select{
+    color: red;
+    background-color: #FEFEED;
+    background-image: none;
+    border: 3px solid #FEF601;
+    border-radius: 40px;
+   transition: none;
 }

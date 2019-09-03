@@ -82,7 +82,7 @@ if __name__ == "__main__":
     db.create_all()
 
     # Import different types of data
-    load_users()
+    create_users()
     load_events()
     # user_event()
 
