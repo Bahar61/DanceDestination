@@ -1,41 +1,45 @@
 {% extends 'base.html' %}
 
 {% block title %}DanceDestination{% endblock %}
+{% block header %}
+<style type="text/css">
+    body{ background: #fffcf2 url('../static/img/dance_9.jpg') no-repeat center;
+          background-size: cover;
+}
+</style>
+{% endblock %}
 
 {% block content %}
+ <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+
+  <script src="http://unpkg.com/babel-standalone"></script>
+  <script src="/static/js/index.js" type="text/jsx"></script>
 <div class="row">
 
     <div class="col-xs-12">
 
         <section id="header_image">
             <table id="fheader_img_table">
-                <tr id="img1"><img src="static/img/dance_1.jpg"></tr>
-                <tr id="img2"><img src="static/img/dance_2.jpg"></tr>
-                <tr id="img3"><img src="static/img/dance_3.jpg"></tr>
-                <tr id="img4"><img src="static/img/dance_4.jpg"></tr>
+               <div id="header-img"></div>
             </table>
         </section>
     </div>
-    
-    <div id="title" class="col-md-4">
-        <h4>What</h4><h4>Are</h4><h4>You</h4><h4>in</h4><h4>the</h4><h4>Mood</h4><h4>Today?</h4>
+    <div id="welcome"></div>
+    <div id="title" class="col-xs-4">
     </div>
 
-        <form action="/events" class="col-md-5">
+        <form action="/events" class="col-xs-6">
 
             <div class="form-group">
                 <label for="music_genre">Music Genre*</label>
                 <select name="genre">
                     <option value="Jazz">Jazz</option>
-                    <br>
                     <option value="Latin">Latin</option>
                     <option value="Tango">Tango</option>
                     <option value="Salsa">Salsa</option>
-                    <br>
                     <option value="African">African</option>
-                    <br>
                     <option value="Hip Hop">Hip Hop</option>
-                    <br>
                     <option value="Electronic">Electronic</option>
                 </select>
             </div>
@@ -48,7 +52,6 @@
             <div class="form-group">
                 <label for="loc-within">Distance*</label>
                 <input id="loc-within" class="form-control" type="number" name="distance" placeholder="25">
-                <br>
                 <select class="form-control" name="measurement">
                     <option value="mi">miles</option>
                     <option value="km">kilometers</option>
@@ -66,12 +69,8 @@
         </form>
     </div>
     <div class="col-xs-12">
-        <section id="footer_image">
+        <section id="footer-image">
             <table id="footer_img_table">
-                <tr id="img1"><img src="static/img/dance_5.jpg"></tr>
-                <tr id="img2"><img src="static/img/dance_6.jpg"></tr>
-                <tr id="img3"><img src="static/img/dance_7.jpg"></tr>
-                <tr id="img4"><img src="static/img/dance_8.jpg"></tr>
             </table>      
         </section>
     </div>

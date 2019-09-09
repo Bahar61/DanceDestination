@@ -1,9 +1,19 @@
 body {
-    background: #EAE7E3 url('../img/dance_9.jpg') no-repeat center;
-    background-size: cover;    
+    background: #570a2b;
+    font-size: 20px; 
+    color: white;
+    font-family: Comic Sans MS;
+
 }
-div::after{
-     
+
+h4{
+    color: darkorange;
+    margin: 10px 5px;
+    padding: 5px;
+}
+p {
+    color: #d1edff;
+    font-size: 14px;
 }
 body > nav > div > div > img{
     height: 40px; 
@@ -16,30 +26,13 @@ img {
     height: 15rem;
 }
 
-#footer_image > img{
-    width: 25%;
-    height: 25rem;
-    margin-top: 40px;
-}
-
-.btn-primary{
-    background-color: #65BCFE;
-    border: 2px solid #65F4FE;
-}
-
-h4{
-    color: darkorange;
-    margin: 20px;
-}
-
 body > div > div.row > form{
-   
-    line-height: 3;
-
+    line-height: 2;
+    margin: 50px;
 }
 
 body > div > div.row > form > div:nth-child(1) > label{
-    color : #DB0ED4;
+    color : #ffc0ff;
 }
 body > div > div.row > form > div:nth-child(2) > label{
     color: #3CBF15;
@@ -51,12 +44,31 @@ body > div > div.row > form > div:nth-child(4) > label{
     color: #B31DFE;
 }
 
+.navbar-inverse .navbar-brand {
+    color: #ffd119;
+}
+.navbar-inverse .navbar-nav > .active > a{
+    color: #fd3030;
+}
+.navbar-inverse .navbar-nav > li > a{
+    color: #97fffc;
+}
+
+#footer-image > img{
+    width: 25%;
+    height: 25rem;
+    margin-top: 40px;
+}
+
+.btn-primary{
+    background-color: #65BCFE;
+    border: 2px solid #65F4FE;
+}
+
 #title {
     display: inline-flex;
-    }
-h4 {
-    margin: 5px; 
 }
+
 #title > h4:nth-child(1){
     color : #E89427;
     margin-left: 15px;
@@ -86,4 +98,9 @@ h4 {
     border: 3px solid #FEF601;
     border-radius: 40px;
    transition: none;
+}
+#welcome > p {
+    color: #fff119;
+    font-size: 2rem;
+    font-weight: bold;
 }

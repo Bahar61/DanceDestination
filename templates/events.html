@@ -4,7 +4,7 @@
 
 {% block content %}
 
-<h2> Events List:</h2>
+<h4> Events List:</h4>
     <ol>
         {% for event in eventbrite_results %}
         
@@ -17,7 +17,7 @@
                 <p>Summary : {{event.summary|safe}}</p>
                 <p>URL : {{event.url|urlize}}</p>
                 <p>Start : {{event.start.local|safe}}</p>
-                <p>Description : {{event.description.html|safe}}</p>
+                <!-- <p>Description : {{event.description.html|safe}}</p> -->
             </li>
 
         {% endfor %}

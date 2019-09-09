@@ -32,9 +32,9 @@ def search_event():
 
     # Get from variables.
     genre = request.args.get('genre')
-    location = request.args.get('location', 'San Francisco')
-    distance = request.args.get('distance', 25)
-    measurement = request.args.get('measurement', 'mi')
+    location = request.args.get('location') or 'San Francisco'
+    distance = request.args.get('distance') or 25
+    measurement = request.args.get('measurement') or 'mi'
     sort = request.args.get('sort')
 
     # If the required information is in the request, look for event
@@ -109,7 +109,7 @@ def register_process():
     user = User.query.filter_by(email=email).first()
 
     if user:
-        flash("We have danced before! Please Log In!")
+        flash("We Have Danced Before! Please Log In!")
         return redirect("/register")
     else:
         new_user = User(fname=fname, lname=lname, email=email, password=password)
@@ -120,7 +120,7 @@ def register_process():
         
         session['user_id'] = new_user.user_id
 
-        flash(f"{new_user.fname} Welcome! Shall we dance?")
+        flash(f"{new_user.fname} Welcome! Shall We Dance?")
         return redirect("/")
 
 
@@ -144,17 +144,17 @@ def login_process():
     user = User.query.filter_by(email=email).first()
 
     if not user:
-        flash("We haven't danced yet!")
-        return redirect("/login")
+        flash("We Haven't Danced Yet! Please Register.")
+        return redirect("/register")
 
     if user.password != password:
         print(user.password)
-        flash("Last time you didn't use this password!")
+        flash("Last Time You Used Different Password!")
         return redirect("/login")
 
     session['user_id'] = user.user_id
 
-    flash(f"{user.fname} shall we dance again?")
+    flash(f"{user.fname} Shall We Dance Again?")
     return redirect(f"/")
 
 
@@ -164,7 +164,7 @@ def logout():
     """Log out."""
 
     del session['user_id']
-    flash(f"You are already missed! Please come back!")
+    flash(f"You Are Already Missed! Please Come Back Soon!")
     return redirect("/")
   
 
