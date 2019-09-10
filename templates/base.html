@@ -1,41 +1,42 @@
 <!DOCTYPE html>
 <head>
   <title>{% block title %}{% endblock %}</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script src="http://code.jquery.com/jquery.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-  <link rel="stylesheet"
-        href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.css"/>
-  <link rel="stylesheet" href="/static/css/site.css"/>
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+  <script src='http://code.jquery.com/jquery.js'></script>
+  <script src='https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js'></script>
+  <link rel='stylesheet'
+        href='http://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.css'/>
+  <link rel='stylesheet' href='/static/css/site.css'/>
+  <link href='https://fonts.googleapis.com/css?family=Cabin+Sketch&display=swap' rel='stylesheet'>
   {% block header %} {% endblock %}
 </head>
 
 <body>
 
-<nav class="navbar navbar-inverse navbar-static-top">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <img src="/static/img/dance_logo.png">
-      <a class="navbar-brand" href="/">DanceDestination</a>
+<nav class='navbar navbar-inverse navbar-static-top'>
+  <div class='container-fluid'>
+    <div class='navbar-header'>
+      <img src='/static/img/dance_logo.png'>
+      <a class='navbar-brand' href='/'>DanceDestination</a>
     </div>
-    <ul class="nav navbar-nav navbar-right">
-      <li class="active"><a href="/events">Events</a></li>
-      {% if session.get("user_id") %}
-        <li><a href="/logout"><span></span>Logout</a></li>
+    <ul class='nav navbar-nav navbar-right'>
+      <li class='active'><a href='/events'>Events</a></li>
+      {% if session.get('user_id') %}
+        <li><a href='/logout'><span></span>Logout</a></li>
         {% else %}
-        <li><a href="/register"><span class="glyphicon glyphicon-user"></span>Register</a></li>
-        <li><a href="/login"><span class="glyphicon glyphicon-log-in"></span>Login</a></li>
+        <li><a href='/register'><span class='glyphicon glyphicon-user'></span> Register</a></li>
+        <li><a href='/login'><span class='glyphicon glyphicon-log-in'></span> Login</a></li>
       {% endif %}
-      <li><a href="/about">About</a></li>
+      <li><a href='/about'>About</a></li>
     </ul>
   </div>
 </nav>
 
-<div class="container">
+<div class='container'>
   <!-- Show flashed messages -->
   {% with messages = get_flashed_messages() %}
       {% for message in messages %}
-          <div class="alert alert-warning">{{ message }}</div>
+          <div class='alert alert-warning'>{{ message }}</div>
       {% endfor %}
   {% endwith %}
 
@@ -43,14 +44,6 @@
   {% block content %}
 
   {% endblock %}
-
-
-  <!-- Footer -->
-<footer class="page-footer font-small black fixed-bottom">
-  <!-- Copyright -->
-  <div class="footer-copyright text-center">© 2019 Copyright: DanceDestination 
-  </div>
-</footer>
-
+  
 </body>
 </html>

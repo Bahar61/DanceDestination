@@ -2,38 +2,59 @@
 
 {% block title %}Events{% endblock %}
 
+{% block header%}
+<style type='text/css'>
+    img {
+        width: 15rem;
+        height: auto;
+    }
+</style>
+{% endblock%}
 {% block content %}
 
 <h4> Events List:</h4>
-    <ol>
-        {% for event in eventbrite_results %}
-        
-            <li>
-                {% if event.logo %}
-                    <img src="{{event.logo.original.url}}", width="200">
-                {% endif %}
+<div class='container'>
+    <ol id='events-list'>
+        {% for events_row in eventbrite_results | batch(3) %}
+            <div class='row'>
+                {% for event in events_row %}
+                    <div class="card" style="width: 18rem;">
+                        {% if event.logo %}
+                            <img class="card-img-top" src='{{event.logo.original.url}}' alt="Card image cap">
+                        {% endif %}
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                Name : {{event.name.html|safe}}
+                            </h5>
+                            <p class="card-text">
+                                Summary : {{event.summary|safe}}, Start: {{event.start.local|safe}}
+                            </p>
+                            <a href="{{event.url}}" class="btn btn-primary">View More Info </a>
+                        </div>
+                    </div>
+                {% endfor %}
 
-                <p>Name : {{event.name.html|safe}}</p>
-                <p>Summary : {{event.summary|safe}}</p>
-                <p>URL : {{event.url|urlize}}</p>
-                <p>Start : {{event.start.local|safe}}</p>
-                <!-- <p>Description : {{event.description.html|safe}}</p> -->
-            </li>
-
+            </div>
         {% endfor %}
 
-        {% for event in elect_results %}
-                <li>
-                    <p>Name : {{ event.name }}</p>
-                    <p>Location : {{ event.location }}</p>
-                    <p>Date : {{ event.date }}</p>
-                    <p>Genre : {{ event.genre }}</p>
-                    <p>Price and Age : {{ event.price_age }}</p>
-                    <p>Organizer : {{ event.organizer }}</p>
-                    <p>Link : {{ event.link | urlize }}</p>
-                </li>
+        {% for events_row in elect_results | batch(3) %}
+            <div class='row'>
+                {% for event in events_row %}
+                        <div class="card" style="width: 18rem;">
+                          <div class="card-body">
+                            <h5 class="card-title">Name : {{ event.name }}</h5>
+                            <p class="card-text">Location : {{ event.location }}, 
+                            Date : {{ event.date }},
+                            Genre : {{ event.genre }},
+                            Price and Age : {{ event.price_age }},
+                            Organizer : {{ event.organizer }}
+                            <a href="#" class="btn btn-primary">Link : {{ event.link | urlize }}</a>
+                          </div>
+                        </div>
+                {% endfor %}
+            </div>
         {% endfor %}
 
     </ol> 
-
+</div>
 {% endblock %}

@@ -1,7 +1,14 @@
 {% extends 'base.html' %}
 {% block title %}About{% endblock %}
-
+{% block header %}
+<style type='text/css'>
+    body{ background: #fffcf2 url('../static/img/dance_9.jpg') no-repeat center;
+          background-size: cover;
+}
+</style>
+{% endblock %}
 {% block content %}
+<div id='about'>
     <h3>About</h3>
 
     <p>
@@ -13,7 +20,8 @@
         I created DanceDestination so user can specify first what type of music is interested in, and based on that searches for the dance events. 
         I hope you enjoy the events you find here and have a wonderful experience.
 
-
+        <br>
         Bahar
     </p>
+</div>
 {% endblock %}

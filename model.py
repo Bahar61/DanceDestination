@@ -10,7 +10,7 @@ db = SQLAlchemy()
 class User(db.Model):
     """User of website."""
 
-    __tablename__ = "users"
+    __tablename__ = 'users'
     # user model class
 
     user_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
@@ -37,7 +37,7 @@ class User(db.Model):
 class Event(db.Model):
     """Event of website."""
 
-    __tablename__ = "events"
+    __tablename__ = 'events'
     # event model class
 
     event_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
@@ -67,7 +67,7 @@ class Event(db.Model):
 class UserEvent(db.Model):
     """User events."""
 
-    __tablename__ = "users_event"
+    __tablename__ = 'users_event'
     # users event model class
 
     user_event_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
@@ -100,7 +100,7 @@ def connect_to_db(app):
 
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     # Run this module interactively, to work with the database directly.
 
     from server import app
@@ -109,4 +109,4 @@ if __name__ == "__main__":
     app = Flask(__name__)
 
     connect_to_db(app)
-    print("Connected to DB.")
+    print('Connected to DB.')

@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 /* component start */ 
 class Welcome extends React.Component {
@@ -12,7 +12,7 @@ class Welcome extends React.Component {
 /* render start */
 ReactDOM.render(
   <Welcome />,
-  document.getElementById("welcome")
+  document.getElementById('welcome')
 );
 /* render end */
 
@@ -23,10 +23,10 @@ class Images extends React.Component {
     render() {
       return (
         <React.Fragment>
-            <img src="static/img/dance_1.jpg"/>
-            <img src="static/img/dance_2.jpg"/>
-            <img src="static/img/dance_3.jpg"/>
-            <img src="static/img/dance_4.jpg"/>
+            <img src='static/img/dance_1.jpg'/>
+            <img src='static/img/dance_2.jpg'/>
+            <img src='static/img/dance_3.jpg'/>
+            <img src='static/img/dance_4.jpg'/>
         </React.Fragment>
       );
     }
@@ -38,7 +38,7 @@ class Images extends React.Component {
 /* render start */
 ReactDOM.render(
   <Images />,
-  document.getElementById("header-img")
+  document.getElementById('header-img')
 );
 /* render end */
 
@@ -61,7 +61,7 @@ class Title extends React.Component {
 /* render start */
 ReactDOM.render(
   <Title />,
-  document.getElementById("title")
+  document.getElementById('title')
 );
 /* render end */
 
@@ -71,10 +71,10 @@ class FooterImages extends React.Component {
     render() {
       return (
         <React.Fragment>
-            <img src="static/img/dance_5.jpg"/>
-            <img src="static/img/dance_6.jpg"/>
-            <img src="static/img/dance_7.jpg"/>
-            <img src="static/img/dance_8.jpg"/>
+            <img src='static/img/dance_5.jpg'/>
+            <img src='static/img/dance_6.jpg'/>
+            <img src='static/img/dance_7.jpg'/>
+            <img src='static/img/dance_8.jpg'/>
         </React.Fragment>
       );
     }
@@ -86,7 +86,7 @@ class FooterImages extends React.Component {
 /* render start */
 ReactDOM.render(
   <FooterImages />,
-  document.getElementById("footer-image")
+  document.getElementById('footer-image')
 );
 /* render end */
 

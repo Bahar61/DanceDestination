@@ -1,79 +1,76 @@
 {% extends 'base.html' %}
 
 {% block title %}DanceDestination{% endblock %}
-{% block header %}
-<style type="text/css">
-    body{ background: #fffcf2 url('../static/img/dance_9.jpg') no-repeat center;
-          background-size: cover;
-}
-</style>
-{% endblock %}
 
 {% block content %}
- <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
-  <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+ <script crossorigin src='https://unpkg.com/react@16/umd/react.development.js'></script>
+  <script crossorigin src='https://unpkg.com/react-dom@16/umd/react-dom.development.js'></script>
 
-  <script src="http://unpkg.com/babel-standalone"></script>
-  <script src="/static/js/index.js" type="text/jsx"></script>
-<div class="row">
+  <script src='http://unpkg.com/babel-standalone'></script>
+  <script src='/static/js/index.js' type='text/jsx'></script>
+<div class='row'>
 
-    <div class="col-xs-12">
+    <div class='col-xs-12'>
 
-        <section id="header_image">
-            <table id="fheader_img_table">
-               <div id="header-img"></div>
+        <section id='header_image'>
+            <table id='fheader_img_table'>
             </table>
         </section>
     </div>
-    <div id="welcome"></div>
-    <div id="title" class="col-xs-4">
+    <div id='welcome'></div>
+    <div id='title' class='col-xs-4'>
     </div>
 
-        <form action="/events" class="col-xs-6">
+        <form action='/events' class='col-xs-6'>
 
-            <div class="form-group">
-                <label for="music_genre">Music Genre*</label>
-                <select name="genre">
-                    <option value="Jazz">Jazz</option>
-                    <option value="Latin">Latin</option>
-                    <option value="Tango">Tango</option>
-                    <option value="Salsa">Salsa</option>
-                    <option value="African">African</option>
-                    <option value="Hip Hop">Hip Hop</option>
-                    <option value="Electronic">Electronic</option>
+            <div class='form-group'>
+                <label for='music_genre'>Music Genre*</label>
+                <select name='genre'>
+                    <option value='Jazz'>Jazz</option>
+                    <option value='Latin'>Latin</option>
+                    <option value='Tango'>Tango</option>
+                    <option value='Salsa'>Salsa</option>
+                    <option value='African'>African</option>
+                    <option value='Hip Hop'>Hip Hop</option>
+                    <option value='Electronic'>Electronic</option>
                 </select>
             </div>
-            <div class="form-group">
+            <div class='form-group'>
 
-                <label for="event-loc">Location*</label>
-                <input id="event-loc" class="form-control" type="text" name="location" placeholder="San Francisco">
+                <label for='event-loc'>Location*</label>
+                <input id='event-loc' class='form-control' type='text' name='location' placeholder='San Francisco'>
 
             </div>
-            <div class="form-group">
-                <label for="loc-within">Distance*</label>
-                <input id="loc-within" class="form-control" type="number" name="distance" placeholder="25">
-                <select class="form-control" name="measurement">
-                    <option value="mi">miles</option>
-                    <option value="km">kilometers</option>
+            <div class='form-group'>
+                <label for='loc-within'>Distance*</label>
+                <input id='loc-within' class='form-control' type='number' name='distance' placeholder='25'>
+                <select class='form-control' name='measurement'>
+                    <option value='mi'>miles</option>
+                    <option value='km'>kilometers</option>
                 </select>
             </div>
-            <div class="form-group">
-                <label for="sort-by">Sort by</label>
-                <select id="sort-by" class="form-control" name="sort">
-                    <option value="date">Date</option>
-                    <option value="distance">Distance</option>
-                    <option value="best">Best</option>
+            <div class='form-group'>
+                <label for='sort-by'>Sort by</label>
+                <select id='sort-by' class='form-control' name='sort'>
+                    <option value='date'>Date</option>
+                    <option value='distance'>Distance</option>
+                    <option value='best'>Best</option>
                 </select>
             </div>
-            <input type="submit" value="Look for Events!" class="btn btn-primary">
+            <input type='submit' value='Look for Events!' class='btn btn-primary'>
         </form>
     </div>
-    <div class="col-xs-12">
-        <section id="footer-image">
-            <table id="footer_img_table">
+    <div class='col-xs-12'>
+        <section id='footer-image'>
+            <table id='footer_img_table'>
             </table>      
         </section>
     </div>
+<!-- Footer -->
+<footer class='page-footer font-small black fixed-bottom'>
+  <!-- Copyright -->
+  <div class='footer-copyright text-center'> © 2019 Copyright: DanceDestination </div>
+</footer>
 
 {% endblock %}
 {% block scripts %}

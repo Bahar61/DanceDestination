@@ -1,18 +1,23 @@
 body {
-    background: #570a2b;
-    font-size: 20px; 
+    background-color: #062F4F;
+    font-size: 15px; 
     color: white;
-    font-family: Comic Sans MS;
+    font-family: 'Cabin Sketch', cursive;
 
 }
 
+body > div {
+    background-color: rgba(0,0,0,0.3);
+    font-size: 20px;
+}
+
 h4{
-    color: darkorange;
+    color: #ee6123;
     margin: 10px 5px;
     padding: 5px;
 }
 p {
-    color: #d1edff;
+    color: #EAC67A;
     font-size: 14px;
 }
 body > nav > div > div > img{
@@ -21,48 +26,41 @@ body > nav > div > div > img{
     margin-top: 5px;
 }
 
-img {
+#header-img > img {
     width: 25%;
-    height: 15rem;
 }
 
 body > div > div.row > form{
-    line-height: 2;
     margin: 50px;
 }
 
-body > div > div.row > form > div:nth-child(1) > label{
-    color : #ffc0ff;
-}
-body > div > div.row > form > div:nth-child(2) > label{
-    color: #3CBF15;
-}
-body > div > div.row > form > div:nth-child(3) > label{
-    color: #FEC21D;
-}
-body > div > div.row > form > div:nth-child(4) > label{
-    color: #B31DFE;
+body > div > div.row > form > div> label{
+    color : #ee6123;
 }
 
+
 .navbar-inverse .navbar-brand {
-    color: #ffd119;
+    color: #EAC67A;
 }
 .navbar-inverse .navbar-nav > .active > a{
-    color: #fd3030;
+    color: #EAC67A;
 }
 .navbar-inverse .navbar-nav > li > a{
-    color: #97fffc;
+    color: #EAC67A;
 }
 
 #footer-image > img{
     width: 25%;
-    height: 25rem;
     margin-top: 40px;
 }
 
 .btn-primary{
-    background-color: #65BCFE;
-    border: 2px solid #65F4FE;
+    background-color: #ee6123;
+    border: 2px solid #b7410e;
+}
+.btn-primary:hover {
+    background-color: #b7410e;
+    border: 2px solid #ee6123;
 }
 
 #title {
@@ -70,37 +68,50 @@ body > div > div.row > form > div:nth-child(4) > label{
 }
 
 #title > h4:nth-child(1){
-    color : #E89427;
+    color : #ee6123;
     margin-left: 15px;
 }
 #title > h4:nth-child(2){
-    color: #D51111;
+    color: #e65212;
 }
 #title > h4:nth-child(3){
-    color: #0CE0E8;
+    color: #cf4910;
 }
 #title > h4:nth-child(4){
-    color: #FE98F4;
+    color: #b7410e;
 }
 #title > h4:nth-child(5){
-    color: #FE7701;
+    color: #cf4910;
 }
 #title > h4:nth-child(6){
-    color: #3FB8FE;
+    color: #e65212;
 }
 #title > h4:nth-child(7){
-    color: #8251D5;
+    color: #ee6123;
 }
 .form-control, body > div > div.row > form > div:nth-child(1) > select{
-    color: red;
+    color: #813772;
     background-color: #FEFEED;
     background-image: none;
-    border: 3px solid #FEF601;
-    border-radius: 40px;
+    border: 3px solid #EAC67A;
+    border-radius: 30px;
    transition: none;
 }
+#event-loc::placeholder{
+    color: #813772;
+}
+#loc-within::placeholder{
+    color: #813772;
+}
 #welcome > p {
-    color: #fff119;
+    color: #EAC67A;
     font-size: 2rem;
     font-weight: bold;
+}
+#about {
+    margin: 150px;
+}
+
+body > div > div.well.spaced {
+    background-color: #062F4F;
 }

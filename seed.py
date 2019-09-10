@@ -7,7 +7,7 @@ from server import app
 
 def create_users():
     """Create users and insert into database."""
-    print("Users")
+    print('Users')
 
 
     # Test user for testing
@@ -29,10 +29,10 @@ def create_users():
 def load_events():
     """Load events from csv file into database."""
 
-    print("Events")
+    print('Events')
 
     # Read data from 19hz wbsite and insert data to database
-    for row in open("seed_data/19hz_scrape.csv"):
+    for row in open('seed_data/19hz_scrape.csv'):
         row = row.rstrip()
         name, location, date, genre, price_age, organizer, link = row.split('\t')
         
@@ -56,7 +56,7 @@ def load_events():
 
 def user_event():
     """Load user event"""
-    print("User Event")
+    print('User Event')
 
     
     user_id = int(user_id) 
@@ -75,7 +75,7 @@ def user_event():
 
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     connect_to_db(app)
 
     # In case tables haven't been created, create them

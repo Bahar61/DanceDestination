@@ -145,17 +145,17 @@ def login_process():
 
     if not user:
         flash("We Haven't Danced Yet! Please Register.")
-        return redirect("/register")
+        return redirect('/register')
 
     if user.password != password:
         print(user.password)
-        flash("Last Time You Used Different Password!")
-        return redirect("/login")
+        flash('Last Time You Used Different Password!')
+        return redirect('/login')
 
     session['user_id'] = user.user_id
 
-    flash(f"{user.fname} Shall We Dance Again?")
-    return redirect(f"/")
+    flash(f'{user.fname} Shall We Dance Again?')
+    return redirect(f'/')
 
 
 
@@ -164,8 +164,8 @@ def logout():
     """Log out."""
 
     del session['user_id']
-    flash(f"You Are Already Missed! Please Come Back Soon!")
-    return redirect("/")
+    flash(f'You Are Already Missed! Please Come Back Soon!')
+    return redirect('/')
   
 
 
@@ -173,12 +173,12 @@ def logout():
 def about():
     """Homepage."""
 
-    return render_template("about.html")
+    return render_template('about.html')
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     # set debug=True here, to invoke the DebugToolbarExtension 
-    app.debug = True
+    app.debug = False
     # make sure templates, etc. are not cached in debug mode
     app.jinja_env.auto_reload = app.debug
 
