@@ -38,7 +38,7 @@ class Images extends React.Component {
 /* render start */
 ReactDOM.render(
   <Images />,
-  document.getElementById('header-img')
+  document.getElementById('header-image')
 );
 /* render end */
 

@@ -8,6 +8,7 @@ from model import User, Event, UserEvent, connect_to_db, db
 import requests
 import os
 import json
+import bleach
 
 
 app = Flask(__name__)
@@ -67,6 +68,9 @@ def search_event():
         # If the response was successful use the list of events from the returned JSON
         if response.ok:
             events = data['events']
+            for event in events:
+                if event.get('summary'):
+                    event['summary'] = bleach.clean(event['summary'])
 
         # If there was an error (status code between 400 and 600), use an empty list
         else:
@@ -178,7 +182,7 @@ def about():
 
 if __name__ == '__main__':
     # set debug=True here, to invoke the DebugToolbarExtension 
-    app.debug = False
+    app.debug = True
     # make sure templates, etc. are not cached in debug mode
     app.jinja_env.auto_reload = app.debug
 

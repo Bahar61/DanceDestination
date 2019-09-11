@@ -1,33 +1,30 @@
 body {
     background-color: #062F4F;
-    font-size: 15px; 
-    color: white;
+    font-size: 3rem; 
+    color: #EAC67A;
     font-family: 'Cabin Sketch', cursive;
 
 }
 
 body > div {
     background-color: rgba(0,0,0,0.3);
-    font-size: 20px;
+    
 }
 
 h4{
+    font-size: 3rem;
     color: #ee6123;
-    margin: 10px 5px;
-    padding: 5px;
+    margin: 40px 3px;
+    padding: 1px;
 }
 p {
     color: #EAC67A;
-    font-size: 14px;
+    font-size: 2rem;
 }
-body > nav > div > div > img{
+body > nav > div > div > img {
     height: 40px; 
     width: auto;  
     margin-top: 5px;
-}
-
-#header-img > img {
-    width: 25%;
 }
 
 body > div > div.row > form{
@@ -38,9 +35,13 @@ body > div > div.row > form > div> label{
     color : #ee6123;
 }
 
+#header-image > img {
+    width: 25%;
+}
 
 .navbar-inverse .navbar-brand {
     color: #EAC67A;
+    font-size: 3rem;
 }
 .navbar-inverse .navbar-nav > .active > a{
     color: #EAC67A;
@@ -57,10 +58,12 @@ body > div > div.row > form > div> label{
 .btn-primary{
     background-color: #ee6123;
     border: 2px solid #b7410e;
+    font-size: 2rem;
 }
 .btn-primary:hover {
     background-color: #b7410e;
     border: 2px solid #ee6123;
+    font-size: 2rem;
 }
 
 #title {
@@ -89,29 +92,74 @@ body > div > div.row > form > div> label{
 #title > h4:nth-child(7){
     color: #ee6123;
 }
+.form-control {
+    font-size: 3rem;
+    height: 6rem;
+}
 .form-control, body > div > div.row > form > div:nth-child(1) > select{
     color: #813772;
     background-color: #FEFEED;
     background-image: none;
     border: 3px solid #EAC67A;
-    border-radius: 30px;
    transition: none;
 }
 #event-loc::placeholder{
     color: #813772;
+    font-size: 3rem;
 }
 #loc-within::placeholder{
     color: #813772;
+    font-size: 3rem;
 }
 #welcome > p {
     color: #EAC67A;
-    font-size: 2rem;
+    font-size: 4rem;
     font-weight: bold;
-}
-#about {
-    margin: 150px;
+    margin-left: 20px;
 }
 
 body > div > div.well.spaced {
     background-color: #062F4F;
 }
+#events-list > div > div {
+    height: calc(100vh - 250px);
+    overflow-y: auto; 
+    background-color: #062F4F;
+}
+#events-list > div > div > div {
+    background-color: #062F4F;
+}
+#events-list > div > div > div > div.panel-footer {
+    background-color: #062F4F;
+}
+#events-list > div > div > div.panel-heading, #events-list > div > div > div.panel-footer {
+    text-align: center;
+}
+#events-list > div > div > div.panel-heading > img {
+    display: inline-block;
+}
+#events-list > div > div > div > img {
+    display: inline-block;
+}
+.panel-default, .panel-default > .panel-heading, .panel-footer {
+    background-color: #062F4F;
+ }
+.center-block {
+    margin: auto;
+    width: 50%;
+}
+#about-text {
+    margin: 10%;
+    font-size: 3rem;
+}
+.panel-title {
+    font-size: 3rem;
+    font-weight: bold;
+    color: #ee6123;
+}
+.panel-body {
+    font-size: 2rem;
+}
+
+
+

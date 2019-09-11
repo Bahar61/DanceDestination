@@ -3,58 +3,70 @@
 {% block title %}Events{% endblock %}
 
 {% block header%}
-<style type='text/css'>
+<style type="text/css">
     img {
-        width: 15rem;
-        height: auto;
+        width: 20rem;
     }
 </style>
 {% endblock%}
 {% block content %}
 
 <h4> Events List:</h4>
-<div class='container'>
+
+<div class='container-fluid' >
     <ol id='events-list'>
-        {% for events_row in eventbrite_results | batch(3) %}
+        {% for events_row in eventbrite_results | batch(3) -%}
             <div class='row'>
-                {% for event in events_row %}
-                    <div class="card" style="width: 18rem;">
-                        {% if event.logo %}
-                            <img class="card-img-top" src='{{event.logo.original.url}}' alt="Card image cap">
-                        {% endif %}
-                        <div class="card-body">
-                            <h5 class="card-title">
+                {% for event in events_row -%}
+                    <div class="col-xs-4 panel panel-default">
+                        {%- if event.logo -%}
+                            <div class="panel-heading">
+                                <img src='{{event.logo.original.url}}'>
+                            </div>    
+                            <h1 class="panel-title">
                                 Name : {{event.name.html|safe}}
-                            </h5>
-                            <p class="card-text">
-                                Summary : {{event.summary|safe}}, Start: {{event.start.local|safe}}
-                            </p>
-                            <a href="{{event.url}}" class="btn btn-primary">View More Info </a>
-                        </div>
+                            </h1>
+                        {%- if event.summary -%}
+                            <div class="panel-body">
+                                Summary : {{event.summary|safe}}
+                                <div>
+                                Start: {{event.start.local|safe}}
+                                </div>
+                            </div>
+                        {% endif %}
+                        {%- if event.url -%}
+                            <div class="panel-footer">
+                            <a href='{{event.url}}' class='btn btn-primary'>View More Info </a>
+                            </div>
+                        {% endif %}
+                        {% endif %}
                     </div>
-                {% endfor %}
+                {%- endfor %}
 
             </div>
-        {% endfor %}
+        {%- endfor %}
 
-        {% for events_row in elect_results | batch(3) %}
+        {% for events_row in elect_results | batch(3) -%}
             <div class='row'>
-                {% for event in events_row %}
-                        <div class="card" style="width: 18rem;">
-                          <div class="card-body">
-                            <h5 class="card-title">Name : {{ event.name }}</h5>
-                            <p class="card-text">Location : {{ event.location }}, 
-                            Date : {{ event.date }},
-                            Genre : {{ event.genre }},
-                            Price and Age : {{ event.price_age }},
-                            Organizer : {{ event.organizer }}
-                            <a href="#" class="btn btn-primary">Link : {{ event.link | urlize }}</a>
+                {% for event in events_row -%}
+                        <div class="col-xs-4 panel panel-default">
+                            {%- if event.name -%}
+                                <h3 class="panel-title">Name : {{ event.name }}</h3>
+                                <div class="panel-body">
+                                    <p>Location : {{ event.location }}</p>
+                                    <p>Date : {{ event.date }}</p>
+                                    <p>Genre : {{ event.genre }}</p>
+                                    <p>Price and Age : {{ event.price_age }}</p>
+                                    <p>Organizer : {{ event.organizer }}</p> 
+                                </div>
+                              <div class="panel-footer">
+                                <a href='{{ event.link | urlize }}' class='btn btn-primary'>View More Info</a>
+                            {% endif %}
                           </div>
                         </div>
-                {% endfor %}
+                {%- endfor %}
             </div>
-        {% endfor %}
-
+        {%- endfor %}
     </ol> 
 </div>
 {% endblock %}
