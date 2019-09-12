@@ -3,14 +3,10 @@ body {
     font-size: 3rem; 
     color: #EAC67A;
     font-family: 'Cabin Sketch', cursive;
-
 }
-
 body > div {
-    background-color: rgba(0,0,0,0.3);
-    
+    background-color: rgba(0,0,0,0.6);  
 }
-
 h4{
     font-size: 3rem;
     color: #ee6123;
@@ -20,6 +16,7 @@ h4{
 p {
     color: #EAC67A;
     font-size: 2rem;
+    font-family: 'Chilanka', cursive;
 }
 body > nav > div > div > img {
     height: 40px; 
@@ -43,13 +40,9 @@ body > div > div.row > form > div> label{
     color: #EAC67A;
     font-size: 3rem;
 }
-.navbar-inverse .navbar-nav > .active > a{
+.navbar-inverse .navbar-nav > .active > a, .navbar-inverse .navbar-nav > li > a{
     color: #EAC67A;
 }
-.navbar-inverse .navbar-nav > li > a{
-    color: #EAC67A;
-}
-
 #footer-image > img{
     width: 25%;
     margin-top: 40px;
@@ -65,32 +58,10 @@ body > div > div.row > form > div> label{
     border: 2px solid #ee6123;
     font-size: 2rem;
 }
-
 #title {
     display: inline-flex;
-}
-
-#title > h4:nth-child(1){
     color : #ee6123;
     margin-left: 15px;
-}
-#title > h4:nth-child(2){
-    color: #e65212;
-}
-#title > h4:nth-child(3){
-    color: #cf4910;
-}
-#title > h4:nth-child(4){
-    color: #b7410e;
-}
-#title > h4:nth-child(5){
-    color: #cf4910;
-}
-#title > h4:nth-child(6){
-    color: #e65212;
-}
-#title > h4:nth-child(7){
-    color: #ee6123;
 }
 .form-control {
     font-size: 3rem;
@@ -103,11 +74,7 @@ body > div > div.row > form > div> label{
     border: 3px solid #EAC67A;
    transition: none;
 }
-#event-loc::placeholder{
-    color: #813772;
-    font-size: 3rem;
-}
-#loc-within::placeholder{
+#event-loc::placeholder, #loc-within::placeholder{
     color: #813772;
     font-size: 3rem;
 }
@@ -117,33 +84,23 @@ body > div > div.row > form > div> label{
     font-weight: bold;
     margin-left: 20px;
 }
-
 body > div > div.well.spaced {
     background-color: #062F4F;
 }
 #events-list > div > div {
-    height: calc(100vh - 250px);
+    height: calc(100vh - 200px);
     overflow-y: auto; 
     background-color: #062F4F;
 }
-#events-list > div > div > div {
-    background-color: #062F4F;
-}
-#events-list > div > div > div > div.panel-footer {
+#events-list > div > div > div, #events-list > div > div > div > div.panel-footer, .panel-default, .panel-default > .panel-heading, .panel-footer {
     background-color: #062F4F;
 }
 #events-list > div > div > div.panel-heading, #events-list > div > div > div.panel-footer {
     text-align: center;
 }
-#events-list > div > div > div.panel-heading > img {
+#events-list > div > div > div.panel-heading > img, #events-list > div > div > div > img {
     display: inline-block;
 }
-#events-list > div > div > div > img {
-    display: inline-block;
-}
-.panel-default, .panel-default > .panel-heading, .panel-footer {
-    background-color: #062F4F;
- }
 .center-block {
     margin: auto;
     width: 50%;
@@ -160,6 +117,3 @@ body > div > div.well.spaced {
 .panel-body {
     font-size: 2rem;
 }
-
-
-
