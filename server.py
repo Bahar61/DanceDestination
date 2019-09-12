@@ -14,7 +14,7 @@ import bleach
 app = Flask(__name__)
 
 # Required to use Flask sessions and the debug toolbar
-app.secret_key = "Something I don't want you to guess!"
+app.secret_key = "MySecretServerKey"
 
 #if an undefined variable used in Jinja2, raises an error.
 app.jinja_env.undefined = StrictUndefined
@@ -188,7 +188,7 @@ if __name__ == '__main__':
 
     connect_to_db(app)
 
-    app.config['SECRET_KEY'] = "<Something I don't want you to guess!>"
+    app.config['SECRET_KEY'] = "<MySecretServerKey>"
 
     # Use the DebugToolbar
     DebugToolbarExtension(app)
