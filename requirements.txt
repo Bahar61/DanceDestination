@@ -12,3 +12,4 @@ Werkzeug==0.14.1
 beautifulsoup4==4.8.0
 html5lib==1.0.1
 requests
+bleach
