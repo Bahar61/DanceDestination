@@ -14,7 +14,7 @@ import bleach
 app = Flask(__name__)
 
 # Required to use Flask sessions and the debug toolbar
-app.secret_key = "MySecretServerKey"
+app.secret_key = os.environ.get('MySecretServerKey')
 
 #if an undefined variable used in Jinja2, raises an error.
 app.jinja_env.undefined = StrictUndefined
