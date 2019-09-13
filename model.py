@@ -27,9 +27,9 @@ class User(db.Model):
         """Provide helpful representation when printed."""
 
         return f"""<User user_id={self.user_id} 
-                            fname={self.fname} 
+                            fname={self.fname}
                             lname={self.lname}
-                            email={self.email} 
+                            email={self.email}
                             password={self.password}>"""
 
 
