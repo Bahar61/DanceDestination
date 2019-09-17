@@ -6,6 +6,13 @@ I am a multicultural dancer and finding dance events based on their music genre 
 Finding Hip Hop dance event is easy, but other styles dance event is challenging. I designed and created 
 DanceDestination, so every person can specify the music genre first and search for dance events based on that. 
 
+## Project Tech Stack
+
+ - Languages | Python, JavaScript, HTML, CSS, SQL 
+ - Frameworks & Libraries | Flask, Bootstrap, Jinja, React, _Beautiful Soup_, Bleach 
+ - Database | PostgreSQL, Git, GitHub
+
+
 Bahar
 [Linkedin](https://www.linkedin.com/in/bahar-asefi-19154218a)
 
