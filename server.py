@@ -57,7 +57,6 @@ def search_event():
         headers = {'Authorization': f'Bearer {token}'}
 
         response = requests.get(f'{base_url}/events/search', params=payload, headers=headers)
-        data = response.json()
         elect_events = []
 
         # If genre is Electronic pull data from database where 19hz website results is saved.
@@ -67,6 +66,8 @@ def search_event():
 
         # If the response was successful use the list of events from the returned JSON
         if response.ok:
+            data = response.json()
+
             events = data['events']
             for event in events:
                 if event.get('summary'):
@@ -74,12 +75,13 @@ def search_event():
 
         # If there was an error (status code between 400 and 600), use an empty list
         else:
-            flash(f"No events: {data['error_description']}")
+            flash(f"""The eventbrite API has deprecated the /events/search \
+                      endpoint, so there were no Eventbrite events found \
+                      for this search.""")
             events = []
         
 
         return render_template("events.html",
-                               data=pformat(data),
                                eventbrite_results=events,
                                elect_results=elect_events,
                                genre=genre,
