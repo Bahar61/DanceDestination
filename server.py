@@ -182,7 +182,7 @@ def about():
 
 if __name__ == '__main__':
     # set debug=True here, to invoke the DebugToolbarExtension 
-    app.debug = True
+    app.debug = False
     # make sure templates, etc. are not cached in debug mode
     app.jinja_env.auto_reload = app.debug
 
