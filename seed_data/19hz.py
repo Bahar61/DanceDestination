@@ -3,6 +3,8 @@
 from bs4 import BeautifulSoup
 import requests
 import csv
+import html5lib
+
 
 source = requests.get('https://19hz.info/eventlisting_BayArea.php').text
 
@@ -14,7 +16,6 @@ soup = BeautifulSoup(source, 'html5lib')
 csv_file = open('19hz_scrape.csv', 'w')
 
 csv_writer = csv.writer(csv_file, delimiter='\t')
-csv_writer.writerow(['name','location','date','genre','price_age','organizer','link'])
 
 def get_td_from_tr(tr):
     """ Find all td html tags."""

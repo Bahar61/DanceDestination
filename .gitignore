@@ -3,3 +3,4 @@ __pycache__/
 secret.sh
 env/
 node_modules
+test.log

@@ -9,6 +9,11 @@ import requests
 import os
 import json
 import bleach
+import logging
+
+#setup basic config for logging
+logging.basicConfig(filename='test.log', level=logging.INFO, 
+    format='[%(asctime)s] [%(levelname)s] %(message)s')
 
 
 app = Flask(__name__)
@@ -24,6 +29,7 @@ app.jinja_env.undefined = StrictUndefined
 def index():
     """Homepage."""
 
+    logging.info('Homepage served.')
     return render_template("dance_destination.html")
 
 
@@ -63,11 +69,10 @@ def search_event():
         if genre == 'Electronic':
             elect_events = Event.query.all() 
 
-
         # If the response was successful use the list of events from the returned JSON
         if response.ok:
+            logging.info(f'EventBrite response was successful with status_code: {response.status_code}')
             data = response.json()
-
             events = data['events']
             for event in events:
                 if event.get('summary'):
@@ -75,9 +80,12 @@ def search_event():
 
         # If there was an error (status code between 400 and 600), use an empty list
         else:
+            logging.warning(f'Unable to recieve EventBrite response, status_code: {response.status_code}')
+            logging.warning(f'Payload: {payload}')
             flash(f"""The eventbrite API has deprecated the /events/search \
                       endpoint, so there were no Eventbrite events found \
                       for this search.""")
+            
             events = []
         
 
