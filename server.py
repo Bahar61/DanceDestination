@@ -12,7 +12,7 @@ import bleach
 import logging
 
 #setup basic config for logging
-logging.basicConfig(filename='test.log', level=logging.INFO, 
+logging.basicConfig(filename='test.log', level=logging.DEBUG, 
     format='[%(asctime)s] [%(levelname)s] %(message)s')
 
 
@@ -159,16 +159,19 @@ def login_process():
 
     if not user:
         flash("We Haven't Danced Yet! Please Register.")
+        logging.info('Not able to login! redirect to register page.')
         return redirect('/register')
 
     if user.password != password:
         print(user.password)
         flash('Last Time You Used Different Password!')
+        logging.info('The password is incorrect! Redirect to login page.')
         return redirect('/login')
 
     session['user_id'] = user.user_id
 
     flash(f'{user.fname} Shall We Dance Again?')
+    logging.info(f'Logged in successful with {user.user_id}.')
     return redirect(f'/')
 
 
@@ -179,6 +182,7 @@ def logout():
 
     del session['user_id']
     flash(f'You Are Already Missed! Please Come Back Soon!')
+    logging.info('User logged out successfuly.')
     return redirect('/')
   
 
@@ -187,6 +191,7 @@ def logout():
 def about():
     """Homepage."""
 
+    logging.info('About page served.')
     return render_template('about.html')
 
 
