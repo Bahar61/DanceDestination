@@ -10,9 +10,10 @@ import os
 import json
 import bleach
 import logging
+from data_base_config import BASE_PATH
 
 #setup basic config for logging
-logging.basicConfig(filename='test.log', level=logging.DEBUG, 
+logging.basicConfig(filename= BASE_PATH + 'server.log', level=logging.DEBUG, 
     format='[%(asctime)s] [%(levelname)s] %(message)s')
 
 

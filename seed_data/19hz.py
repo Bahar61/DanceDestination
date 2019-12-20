@@ -4,6 +4,7 @@ from bs4 import BeautifulSoup
 import requests
 import csv
 import html5lib
+from data_base_config import BASE_PATH
 
 
 source = requests.get('https://19hz.info/eventlisting_BayArea.php').text
@@ -13,7 +14,8 @@ source = requests.get('https://19hz.info/eventlisting_BayArea.php').text
 
 soup = BeautifulSoup(source, 'html5lib')
 
-csv_file = open('19hz_scrape.csv', 'w')
+location = BASE_PATH + 'seed_data/'
+csv_file = open( location + '19hz_scrape.csv', 'w')
 
 csv_writer = csv.writer(csv_file, delimiter='\t')
 

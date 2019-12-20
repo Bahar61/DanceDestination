@@ -1,9 +1,15 @@
-"""Utility file to seed dance_event database from MovieLens data in seed_data/"""
+"""Utility file to seed dance_event database from 19hz data in seed_data/"""
 
 from sqlalchemy import func
 from model import User, Event, UserEvent
 from model import connect_to_db, db
 from server import app
+from data_base_config import BASE_PATH
+import logging
+
+#setup basic config for logging
+logging.basicConfig(filename= BASE_PATH + 'seed.log', level=logging.DEBUG, 
+    format='[%(asctime)s] [%(levelname)s] %(message)s')
 
 def create_users():
     """Create users and insert into database."""
@@ -24,7 +30,7 @@ def create_users():
 
     # commit the work
     db.session.commit()
-
+    logging.info('Users table updated successfully.')
 
 def load_events():
     """Load events from csv file into database."""
@@ -32,7 +38,7 @@ def load_events():
     print('Events')
 
     # Read data from 19hz wbsite and insert data to database
-    for row in open('seed_data/19hz_scrape.csv'):
+    for row in open(BASE_PATH +'seed_data/19hz_scrape.csv'):
         row = row.rstrip()
         name, location, date, genre, price_age, organizer, link = row.split('\t')
         
@@ -51,7 +57,7 @@ def load_events():
 
         # commit the work
     db.session.commit()
-
+    logging.info('Events table updated successfully.')
 
 
 def user_event():
@@ -73,7 +79,18 @@ def user_event():
     #commit the work
     db.session.commit()
 
+def update_events_database():
+    # updates Events table with new data
 
+    connect_to_db(app)
+
+    # In case tables haven't been created, create them
+    db.create_all()
+
+    logging.info('Attempting to update Events table.')
+    # Import different types of data
+    load_events()
+    
 
 if __name__ == '__main__':
     connect_to_db(app)
