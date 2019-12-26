@@ -4,6 +4,8 @@ from bs4 import BeautifulSoup
 import requests
 import csv
 import html5lib
+import sys
+sys.path.append(".")
 from data_base_config import BASE_PATH
 
 

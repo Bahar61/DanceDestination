@@ -12,9 +12,21 @@ import bleach
 import logging
 from data_base_config import BASE_PATH
 
-#setup basic config for logging
-logging.basicConfig(filename= BASE_PATH + 'server.log', level=logging.DEBUG, 
-    format='[%(asctime)s] [%(levelname)s] %(message)s')
+# Create a custom logger
+logger = logging.getLogger(__name__)
+
+# Create handlers
+f_handler = logging.FileHandler('server.log')
+logger.setLevel(logging.DEBUG)
+
+# Create formatters and add it to handlers
+f_format = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
+f_handler.setFormatter(f_format)
+
+
+# Add handlers to the logger
+logger.addHandler(f_handler)
+
 
 
 app = Flask(__name__)
@@ -30,7 +42,7 @@ app.jinja_env.undefined = StrictUndefined
 def index():
     """Homepage."""
 
-    logging.info('Homepage served.')
+    logger.info('Homepage served.')
     return render_template("dance_destination.html")
 
 
@@ -72,7 +84,7 @@ def search_event():
 
         # If the response was successful use the list of events from the returned JSON
         if response.ok:
-            logging.info(f'EventBrite response was successful with status_code: {response.status_code}')
+            logger.info(f'EventBrite response was successful with status_code: {response.status_code}')
             data = response.json()
             events = data['events']
             for event in events:
@@ -81,8 +93,8 @@ def search_event():
 
         # If there was an error (status code between 400 and 600), use an empty list
         else:
-            logging.warning(f'Unable to recieve EventBrite response, status_code: {response.status_code}')
-            logging.warning(f'Payload: {payload}')
+            logger.warning(f'Unable to recieve EventBrite response, status_code: {response.status_code}')
+            logger.warning(f'Payload: {payload}')
             flash(f"""The eventbrite API has deprecated the /events/search \
                       endpoint, so there were no Eventbrite events found \
                       for this search.""")
@@ -160,19 +172,19 @@ def login_process():
 
     if not user:
         flash("We Haven't Danced Yet! Please Register.")
-        logging.info('Not able to login! redirect to register page.')
+        logger.info('Not able to login! redirect to register page.')
         return redirect('/register')
 
     if user.password != password:
         print(user.password)
         flash('Last Time You Used Different Password!')
-        logging.info('The password is incorrect! Redirect to login page.')
+        logger.info('The password is incorrect! Redirect to login page.')
         return redirect('/login')
 
     session['user_id'] = user.user_id
 
     flash(f'{user.fname} Shall We Dance Again?')
-    logging.info(f'Logged in successful with {user.user_id}.')
+    logger.info(f'Logged in successful with {user.user_id}.')
     return redirect(f'/')
 
 
@@ -183,7 +195,7 @@ def logout():
 
     del session['user_id']
     flash(f'You Are Already Missed! Please Come Back Soon!')
-    logging.info('User logged out successfuly.')
+    logger.info('User logged out successfuly.')
     return redirect('/')
   
 
@@ -192,7 +204,7 @@ def logout():
 def about():
     """Homepage."""
 
-    logging.info('About page served.')
+    logger.info('About page served.')
     return render_template('about.html')
 
 

@@ -7,9 +7,22 @@ from server import app
 from data_base_config import BASE_PATH
 import logging
 
-#setup basic config for logging
-logging.basicConfig(filename= BASE_PATH + 'seed.log', level=logging.DEBUG, 
-    format='[%(asctime)s] [%(levelname)s] %(message)s')
+
+# Create a custom logger
+logger = logging.getLogger(__name__)
+
+# Create handlers
+f_handler = logging.FileHandler('seed.log')
+logger.setLevel(logging.DEBUG)
+
+# Create formatters and add it to handlers
+f_format = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
+f_handler.setFormatter(f_format)
+
+
+# Add handlers to the logger
+logger.addHandler(f_handler)
+
 
 def create_users():
     """Create users and insert into database."""
@@ -30,8 +43,8 @@ def create_users():
 
     # commit the work
     db.session.commit()
-    logging.info('Users table updated successfully.')
-
+    logger.info('Users table updated successfully.')
+    
 def load_events():
     """Load events from csv file into database."""
 
@@ -57,7 +70,7 @@ def load_events():
 
         # commit the work
     db.session.commit()
-    logging.info('Events table updated successfully.')
+    logger.info('Events table updated successfully.')
 
 
 def user_event():
@@ -87,7 +100,7 @@ def update_events_database():
     # In case tables haven't been created, create them
     db.create_all()
 
-    logging.info('Attempting to update Events table.')
+    logger.info('Attempting to update Events table.')
     # Import different types of data
     load_events()
     

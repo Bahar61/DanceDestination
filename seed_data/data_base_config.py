@@ -1,1 +1,0 @@
-BASE_PATH='/home/vagrant/src/dance-destination/'
