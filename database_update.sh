@@ -1,4 +1,3 @@
-touch /tmp/runed
 source /home/vagrant/src/dance-destination/env/bin/activate
 cd /home/vagrant/src/dance-destination
 rm seed_data/19hz_scrape.csv
