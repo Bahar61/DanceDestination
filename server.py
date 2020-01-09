@@ -1,6 +1,5 @@
 """Dance Destination."""
 
-from pprint import pformat
 from jinja2 import StrictUndefined
 from flask_debugtoolbar import DebugToolbarExtension
 from flask import Flask, render_template, redirect, request, flash, session

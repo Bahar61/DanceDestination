@@ -1,6 +1,5 @@
 """Utility file to seed dance_event database from 19hz data in seed_data/"""
 
-from sqlalchemy import func
 from model import User, Event, UserEvent
 from model import connect_to_db, db
 from server import app

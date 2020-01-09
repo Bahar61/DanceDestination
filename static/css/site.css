@@ -88,7 +88,7 @@ body > div > div.well.spaced {
     background-color: #062F4F;
 }
 #events-list > div > div {
-    height: calc(100vh - 70px);
+    height: calc(70vh - 50px);
     overflow-y: auto; 
     background-color: #062F4F;
 }
