@@ -46,42 +46,7 @@ class Title extends React.Component {
       React.createElement(
         'h4',
         null,
-        'What'
-      ),
-      React.createElement(
-        'h4',
-        null,
-        'Are'
-      ),
-      React.createElement(
-        'h4',
-        null,
-        'You'
-      ),
-      React.createElement(
-        'h4',
-        null,
-        'in'
-      ),
-      React.createElement(
-        'h4',
-        null,
-        'the'
-      ),
-      React.createElement(
-        'h4',
-        null,
-        'Mood'
-      ),
-      React.createElement(
-        'h4',
-        null,
-        'for'
-      ),
-      React.createElement(
-        'h4',
-        null,
-        'Today?'
+        'What Are You in the Mood for Today?'
       )
     );
   }

@@ -49,7 +49,7 @@ class Title extends React.Component {
     render() {
       return (
         <React.Fragment>
-            <h4>What</h4><h4>Are</h4><h4>You</h4><h4>in</h4><h4>the</h4><h4>Mood</h4><h4>for</h4><h4>Today?</h4>
+            <h4>What Are You in the Mood for Today?</h4>
         </React.Fragment>
       );
     }
