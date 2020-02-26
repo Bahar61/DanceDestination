@@ -13,10 +13,6 @@ DanceDestination, so every person can specify the music genre first and search f
  - Frameworks & Libraries | Flask, Bootstrap, Jinja, React, _Beautiful Soup_, Bleach 
  - Database | PostgreSQL
 
-
-Bahar
-[Linkedin](https://www.linkedin.com/in/bahar-asefi-19154218a)
-
 ![](https://lh3.googleusercontent.com/IaRpXDzGxRnxfeQIONHMz_lOno4JYSNX1cEx8Qq0w2OaMLu2JyVim5aslV9W-LjAavDGHBVnpuELMQ)
 
 
@@ -26,3 +22,6 @@ Bahar
  - 19hz Website
 
 ![](https://lh3.googleusercontent.com/go-5c-ZDai4Q2jFV7HH7cTYw9mw9FrAPM4iq8D4cn9e_vD-o0xZ415tsnuBSYFNzcvxJcrLrDOGFVg)
+
+Bahar
+[Linkedin](https://www.linkedin.com/in/bahar-asefi-19154218a)
